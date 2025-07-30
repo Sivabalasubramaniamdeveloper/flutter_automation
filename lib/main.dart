@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await ScreenUtil.ensureScreenSize();
   runApp(const MyApp());
 }
 
@@ -11,13 +12,20 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: "Flutter Automation",
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const InfoScreen(),
+    return ScreenUtilInit(
+      minTextAdapt: true,
+      splitScreenMode: true,
+      designSize: const Size(412, 846),
+      builder: (context, child) {
+        return MaterialApp(
+          title: "Flutter Automation",
+          theme: ThemeData(
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+            useMaterial3: true,
+          ),
+          home: InfoScreen(),
+        );
+      },
     );
   }
 }
@@ -76,7 +84,9 @@ class InfoScreen extends StatelessWidget {
               const BulletPoint(text: 'Firebase integration via CLI'),
               const BulletPoint(text: 'Sample login page injection'),
               const SizedBox(height: 20),
-              const Text('✅ Use this automation tool to quickly set up your Flutter project with best practices!'),
+              const Text(
+                '✅ Use this automation tool to quickly set up your Flutter project with best practices!',
+              ),
             ],
           ),
         ),

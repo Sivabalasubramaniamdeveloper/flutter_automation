@@ -56,7 +56,7 @@ else
 fi
 
 # --------- Generate lib/flavor folder and config ---------
-mkdir -p lib/flavor
+#mkdir -p lib/config/flavor
 
 # flavor_config.dart
 FLAVOR_ENUMS=""
@@ -86,7 +86,7 @@ done
 # shellcheck disable=SC2001
 FLAVOR_ENUMS=$(echo "$FLAVOR_ENUMS" | sed 's/, $//')
 
-cat > lib/flavor/flavor_config.dart <<EOL
+cat > lib/config/flavor/flavor_config.dart <<EOL
 enum Flavor {
   $FLAVOR_ENUMS
 }
@@ -117,11 +117,11 @@ $IS_APP_SWITCH      default:
 }
 EOL
 
-echo " Generated lib/flavor/flavor_config.dart"
+echo " Generated lib/config/flavor/flavor_config.dart"
 
 # --------- Create main entry for each flavor ----------
 for FLAVOR in "${FLAVORS[@]}"; do
-  FILE_PATH="lib/flavor/${FLAVOR}.dart"
+  FILE_PATH="lib/config/flavor/${FLAVOR}.dart"
   echo " Creating $FILE_PATH"
   cat > "$FILE_PATH" <<EOL
 import 'flavor_config.dart';
@@ -134,7 +134,7 @@ Future<void> main() async {
 EOL
 done
 
-echo " Created entry point Dart files in lib/flavor/"
+echo " Created entry point Dart files in lib/config/flavor/"
 
 # --------- Update AndroidManifest.xml ----------
 MANIFEST="android/app/src/main/AndroidManifest.xml"
