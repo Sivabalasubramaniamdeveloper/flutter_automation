@@ -1,0 +1,1 @@
+//	Centralized color definitions (Color(0xFF123456) or ColorName.primary).
