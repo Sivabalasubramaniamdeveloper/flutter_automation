@@ -1,0 +1,7 @@
+  echo "📘 Flutter Automation Setup Script - Available Commands:"
+  echo ""
+  echo "  ./help.sh                     Show this help menu"
+  echo "  ./change_appname.sh           Change App Name in (android & ios)"
+  echo "  ./change_appicon.sh           Change App icon"
+  echo "  ./init_project.sh             Setup basic the flutter project"
+  echo "  ./firebase_configure.sh       Initialize the firebase in project"
