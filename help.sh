@@ -6,4 +6,5 @@
   echo "  ./init_project.sh             Setup basic the flutter project"
   echo "  ./firebase_configure.sh       Initialize the firebase in project"
   echo "  ./sample_screens.sh           Sample UI components and screens"
+  echo "  ./change_repo.sh              Change the project repo"
 
