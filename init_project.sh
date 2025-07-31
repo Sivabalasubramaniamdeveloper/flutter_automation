@@ -56,7 +56,7 @@ else
 fi
 
 # --------- Generate lib/flavor folder and config ---------
-#mkdir -p lib/config/flavor
+mkdir -p lib/config/flavor
 
 # flavor_config.dart
 FLAVOR_ENUMS=""
