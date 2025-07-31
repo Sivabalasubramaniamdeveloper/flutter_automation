@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_alice/alice.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:overlay_support/overlay_support.dart';
+import 'core/network/alice.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await ScreenUtil.ensureScreenSize();
-  runApp(const MyApp());
+  final alice = Alice(showNotification: true);
+  await dioProvider.initAlice(alice);
+  runApp(OverlaySupport.global(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -19,11 +24,28 @@ class MyApp extends StatelessWidget {
       builder: (context, child) {
         return MaterialApp(
           title: "Flutter Automation",
+          navigatorKey: dioProvider.navigatorKey,
           theme: ThemeData(
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
           ),
           home: InfoScreen(),
+          supportedLocales: [
+            Locale('en'),
+            Locale('zh'),
+            Locale('fr'),
+            Locale('es'),
+            Locale('de'),
+            Locale('ru'),
+            Locale('ja'),
+            Locale('ar'),
+            Locale('fa'),
+            Locale("es"),
+            Locale("it"),
+            Locale("ta"),
+            Locale('ms'),
+          ],
+          debugShowCheckedModeBanner: false,
         );
       },
     );
