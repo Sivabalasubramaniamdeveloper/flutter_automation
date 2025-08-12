@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_automation/core/constants/app_assets.dart';
-
-import '../core/utils/common_functions.dart';
+import 'package:flutter_automation/config/router/route_functions.dart';
 import '../core/widgets/bullet_points_text.dart';
-import 'circular_avathar.dart';
 
 class InfoScreen extends StatelessWidget {
   const InfoScreen({super.key});
@@ -62,39 +59,22 @@ class InfoScreen extends StatelessWidget {
               const Text(
                 '✅ Use this automation tool to quickly set up your Flutter project with best practices!',
               ),
-              Center(
-                child: CustomCircularAvatar(
-                  imageUrl: AppAssets.ben10Image, // Use null to show icon
-                  // icon: Icons.person, // Uncomment to use icon instead
-                  radius: 50.0,
-                  // backgroundColor: Colors.blue,
-                ),
-              ),
-              CustomCircularAvatar(
-                imageUrl: AppAssets.ben10Image, // Use an image URL
-                radius: 50,
-              ),
-              SizedBox(height: 20),
-              CustomCircularAvatar(
-                icon: Icons.person,
-                radius: 50,
-                backgroundColor: Colors.blue,
-              ),
+
               ElevatedButton(
                 onPressed: () {
-                  CommonFunctions.navigateToWithArgs(context, '/screen1', 123);
+                  RouteFunctions.navigateToWithArgs(context, '/screen1', 123);
                 },
                 child: const Text('screen1'),
               ),
               ElevatedButton(
                 onPressed: () {
-                  CommonFunctions.navigateTo(context, '/screen2');
+                  RouteFunctions.navigateTo(context, '/screen2');
                 },
                 child: const Text('screen2'),
               ),
               ElevatedButton(
                 onPressed: () {
-                  CommonFunctions.pushNamedAndRemoveUntil(context, '/screen3', {
+                  RouteFunctions.pushNamedAndRemoveUntil(context, '/screen3', {
                     's': "sss",
                   });
                 },

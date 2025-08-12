@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 
-import '../loginpage.dart';
 
 class Screen2 extends StatefulWidget {
   const Screen2({super.key});
@@ -12,6 +11,6 @@ class Screen2 extends StatefulWidget {
 class _Screen2State extends State<Screen2> {
   @override
   Widget build(BuildContext context) {
-    return ForgetUsernamePage();
+    return Text("Screen2");
   }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_automation/textfiled.dart';
+
 
 class Screen3 extends StatefulWidget {
   const Screen3({super.key});
@@ -11,6 +11,6 @@ class Screen3 extends StatefulWidget {
 class _Screen3State extends State<Screen3> {
   @override
   Widget build(BuildContext context) {
-    return MyHomePage();
+    return Text("Screen 3");
   }
 }

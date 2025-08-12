@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter_automation/dashboard_screen.dart';
+
 
 class Screen1 extends StatefulWidget {
   const Screen1({super.key});
@@ -12,6 +12,6 @@ class _Screen1State extends State<Screen1> {
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments as int;
-    return DashboardScreen();
+    return Text("Screen1");
   }
 }

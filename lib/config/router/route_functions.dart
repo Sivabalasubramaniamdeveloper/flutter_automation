@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 
-// ----------------------
-//  NAVIGATION HELPERS
-// ----------------------
-class CommonFunctions {
+class RouteFunctions{
+  //  ----------------------
+  //  NAVIGATION HELPERS
+  // ----------------------
   // Navigate to a page by route name (no arguments)
   static navigateTo(BuildContext context, String routeName) {
     Navigator.pushNamed(context, routeName);
@@ -11,10 +11,10 @@ class CommonFunctions {
 
   // Navigate to a page by route name with arguments
   static navigateToWithArgs(
-    BuildContext context,
-    String routeName,
-    dynamic arguments,
-  ) {
+      BuildContext context,
+      String routeName,
+      dynamic arguments,
+      ) {
     Navigator.pushNamed(context, routeName, arguments: arguments);
   }
 
@@ -25,18 +25,18 @@ class CommonFunctions {
 
   // Replace current page with a new one with arguments
   static replaceWithArgs(
-    BuildContext context,
-    String routeName,
-    dynamic arguments,
-  ) {
+      BuildContext context,
+      String routeName,
+      dynamic arguments,
+      ) {
     Navigator.pushReplacementNamed(context, routeName, arguments: arguments);
   }
 
   static pushNamedAndRemoveUntil(
-    BuildContext context,
-    String routeName,
-    dynamic arguments,
-  ) {
+      BuildContext context,
+      String routeName,
+      dynamic arguments,
+      ) {
     Navigator.pushNamedAndRemoveUntil(context, routeName, (route) => false);
   }
 
