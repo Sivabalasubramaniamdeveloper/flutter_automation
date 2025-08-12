@@ -267,7 +267,7 @@ EOL
 
 echo " Created MainActivity.kt with correct package declaration"
 
-MAIN_DART_FILE="lib/main.dart"
+MAIN_DART_FILE="lib/app.dart"
 
 # Check if file exists
 if [ -f "$MAIN_DART_FILE" ]; then

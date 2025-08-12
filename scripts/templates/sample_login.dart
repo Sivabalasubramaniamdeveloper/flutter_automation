@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CoffeeLoginPage extends StatefulWidget {
+  const CoffeeLoginPage({super.key});
+
   @override
   _CoffeeLoginPageState createState() => _CoffeeLoginPageState();
 }
@@ -44,7 +46,9 @@ class _CoffeeLoginPageState extends State<CoffeeLoginPage> {
                   obscure: _obscurePassword,
                   suffixIcon: IconButton(
                     icon: Icon(
-                      _obscurePassword ? Icons.visibility_off : Icons.visibility,
+                      _obscurePassword
+                          ? Icons.visibility_off
+                          : Icons.visibility,
                       color: Colors.grey,
                     ),
                     onPressed: () {

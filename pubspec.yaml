@@ -38,6 +38,11 @@ dependencies:
   flutter_alice: ^2.0.1
   pretty_dio_logger: ^1.4.0
   dio: ^5.8.0+1
+  intl: ^0.20.2
+  firebase_messaging: ^16.0.0
+  shared_preferences: ^2.5.3
+  flutter_local_notifications: ^19.4.0
+
 
 dev_dependencies:
   flutter_test:

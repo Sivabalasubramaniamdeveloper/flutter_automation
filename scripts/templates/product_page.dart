@@ -22,7 +22,9 @@ class _ProductPageState extends State<ProductPage> {
 
   Future<void> fetchProducts() async {
     try {
-      final response = await dioProvider.dio.get('https://fakesoreapi.com/products');
+      final response = await dioProvider.dio.get(
+        'https://fakesoreapi.com/products',
+      );
       setState(() {
         products = response.data;
         isLoading = false;
@@ -38,20 +40,25 @@ class _ProductPageState extends State<ProductPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: GestureDetector(onTap:fetchProducts,child: const Text('Fake Store'))),
+      appBar: AppBar(
+        title: GestureDetector(
+          onTap: fetchProducts,
+          child: const Text('Fake Store'),
+        ),
+      ),
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
           : ListView.builder(
-        itemCount: products.length,
-        itemBuilder: (context, index) {
-          final product = products[index];
-          return ListTile(
-            leading: Image.network(product['image'], height: 50),
-            title: Text(product['title']),
-            subtitle: Text('\$${product['price']}'),
-          );
-        },
-      ),
+              itemCount: products.length,
+              itemBuilder: (context, index) {
+                final product = products[index];
+                return ListTile(
+                  leading: Image.network(product['image'], height: 50),
+                  title: Text(product['title']),
+                  subtitle: Text('\$${product['price']}'),
+                );
+              },
+            ),
     );
   }
 }
