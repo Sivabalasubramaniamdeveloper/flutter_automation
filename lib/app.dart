@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'config/router/route_names.dart';
 import 'config/router/routes.dart';
+import 'config/theme/app_theme.dart';
 import 'core/network/alice.dart';
 
 class MyApp extends StatelessWidget {
@@ -17,10 +18,9 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           title: "Flutter Automation",
           navigatorKey: dioProvider.navigatorKey,
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-            useMaterial3: true,
-          ),
+          theme: AppTheme.getDarkTheme(),
+          // darkTheme: AppTheme.getDarkTheme(),
+          // themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
           initialRoute: RouteNames.home,
           routes: Routes.getRoutes(),
           supportedLocales: [

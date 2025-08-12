@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_automation/config/router/route_functions.dart';
+import 'package:flutter_automation/core/constants/app_text_styles.dart';
 import '../core/widgets/bullet_points_text.dart';
 
 class InfoScreen extends StatelessWidget {
@@ -9,7 +10,7 @@ class InfoScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Flutter Automation Setup'),
+        title:  Text('Flutter Automation Setup'),
         backgroundColor: Theme.of(context).colorScheme.primary,
         foregroundColor: Colors.white,
       ),
@@ -19,9 +20,9 @@ class InfoScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              Text(
                 '🚀 Welcome to Flutter Automation App',
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                style: AppTextStyles.heading,
               ),
               const SizedBox(height: 20),
               const Text(
@@ -29,7 +30,7 @@ class InfoScreen extends StatelessWidget {
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 8),
-              const Text('- Open your terminal or Git Bash'),
+               Text('- Open your terminal or Git Bash',style: AppTextStyles.body,),
               const Text('- Run the following command:'),
               const SizedBox(height: 8),
               Container(
