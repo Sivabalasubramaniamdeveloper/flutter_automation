@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-class RouteFunctions{
+class RouteFunctions {
   //  ----------------------
   //  NAVIGATION HELPERS
   // ----------------------
@@ -11,10 +11,10 @@ class RouteFunctions{
 
   // Navigate to a page by route name with arguments
   static navigateToWithArgs(
-      BuildContext context,
-      String routeName,
-      dynamic arguments,
-      ) {
+    BuildContext context,
+    String routeName,
+    dynamic arguments,
+  ) {
     Navigator.pushNamed(context, routeName, arguments: arguments);
   }
 
@@ -25,18 +25,18 @@ class RouteFunctions{
 
   // Replace current page with a new one with arguments
   static replaceWithArgs(
-      BuildContext context,
-      String routeName,
-      dynamic arguments,
-      ) {
+    BuildContext context,
+    String routeName,
+    dynamic arguments,
+  ) {
     Navigator.pushReplacementNamed(context, routeName, arguments: arguments);
   }
 
   static pushNamedAndRemoveUntil(
-      BuildContext context,
-      String routeName,
-      dynamic arguments,
-      ) {
+    BuildContext context,
+    String routeName,
+    dynamic arguments,
+  ) {
     Navigator.pushNamedAndRemoveUntil(context, routeName, (route) => false);
   }
 

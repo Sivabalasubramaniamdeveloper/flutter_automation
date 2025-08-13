@@ -1,4 +1,3 @@
-
 class CommonFunctionsHelper {
   //  ----------------------
   //  Other Common Functions

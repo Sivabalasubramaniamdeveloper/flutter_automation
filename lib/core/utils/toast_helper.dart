@@ -19,7 +19,6 @@ showWarningToast(String message, {Toast toastLength = Toast.LENGTH_LONG}) {
     timeInSecForIosWeb: 3,
     fontSize: 13.sp,
     toastLength: toastLength,
-    // backgroundColor: KConstantColors.primaryColor,
     textColor: Colors.white,
   );
 }
@@ -31,7 +30,6 @@ showSuccessToast(String message, {Toast toastLength = Toast.LENGTH_LONG}) {
     fontSize: 13.sp,
     gravity: ToastGravity.BOTTOM,
     toastLength: toastLength,
-    // textColor: KConstantColors.blackColor,
   );
 }
 

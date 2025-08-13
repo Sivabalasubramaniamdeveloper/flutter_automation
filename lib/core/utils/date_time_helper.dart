@@ -91,5 +91,4 @@ class DateTimeHelper {
     DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(epochTime);
     return DateFormat("MMM d yyyy h:mm a").format(dateTime);
   }
-
 }
