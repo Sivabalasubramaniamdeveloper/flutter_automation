@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 
-
 class BulletPoint extends StatelessWidget {
   final String text;
   const BulletPoint({super.key, required this.text});
@@ -12,7 +11,7 @@ class BulletPoint extends StatelessWidget {
       child: Row(
         children: [
           Text('• ', style: TextStyle(fontSize: 16)),
-          Expanded(child: Text(text, style:  TextStyle(fontSize: 16))),
+          Expanded(child: Text(text, style: TextStyle(fontSize: 16))),
         ],
       ),
     );

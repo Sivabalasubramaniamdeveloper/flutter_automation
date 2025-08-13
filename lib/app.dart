@@ -1,7 +1,10 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'app_providers.dart';
+import 'config/router/route_generator.dart';
 import 'config/router/route_names.dart';
-import 'config/router/routes.dart';
 import 'config/theme/app_theme.dart';
 import 'core/network/alice.dart';
 
@@ -10,37 +13,38 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScreenUtilInit(
-      minTextAdapt: true,
-      splitScreenMode: true,
-      designSize: const Size(412, 846),
-      builder: (context, child) {
-        return MaterialApp(
-          title: "Flutter Automation",
-          navigatorKey: dioProvider.navigatorKey,
-          theme: AppTheme.getDarkTheme(),
-          // darkTheme: AppTheme.getDarkTheme(),
-          // themeMode: isDarkMode ? ThemeMode.dark : ThemeMode.light,
-          initialRoute: RouteNames.home,
-          routes: Routes.getRoutes(),
-          supportedLocales: [
-            Locale('en'),
-            Locale('zh'),
-            Locale('fr'),
-            Locale('es'),
-            Locale('de'),
-            Locale('ru'),
-            Locale('ja'),
-            Locale('ar'),
-            Locale('fa'),
-            Locale("es"),
-            Locale("it"),
-            Locale("ta"),
-            Locale('ms'),
-          ],
-          debugShowCheckedModeBanner: false,
-        );
-      },
+    return MultiBlocProvider(
+      providers: getAppProviders(Connectivity()),
+      child: ScreenUtilInit(
+        minTextAdapt: true,
+        splitScreenMode: true,
+        designSize: const Size(412, 846),
+        builder: (context, child) {
+          return MaterialApp(
+            title: "Flutter Automation",
+            navigatorKey: dioProvider.navigatorKey,
+            theme: AppTheme.getNaturalTheme(),
+            initialRoute: RouteNames.home,
+            onGenerateRoute: AppRouter.generateRoute,
+            supportedLocales: [
+              Locale('en'),
+              Locale('zh'),
+              Locale('fr'),
+              Locale('es'),
+              Locale('de'),
+              Locale('ru'),
+              Locale('ja'),
+              Locale('ar'),
+              Locale('fa'),
+              Locale("es"),
+              Locale("it"),
+              Locale("ta"),
+              Locale('ms'),
+            ],
+            debugShowCheckedModeBanner: false,
+          );
+        },
+      ),
     );
   }
 }

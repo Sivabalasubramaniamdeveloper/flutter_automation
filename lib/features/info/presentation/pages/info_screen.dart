@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_automation/config/router/route_functions.dart';
 import 'package:flutter_automation/core/constants/app_text_styles.dart';
-import '../core/widgets/bullet_points_text.dart';
+import '../../../../core/widgets/bullet_points_text.dart';
 
 class InfoScreen extends StatelessWidget {
   const InfoScreen({super.key});
@@ -10,7 +10,7 @@ class InfoScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:  Text('Flutter Automation Setup'),
+        title: Text('Flutter Automation Setup'),
         backgroundColor: Theme.of(context).colorScheme.primary,
         foregroundColor: Colors.white,
       ),
@@ -30,7 +30,10 @@ class InfoScreen extends StatelessWidget {
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 8),
-               Text('- Open your terminal or Git Bash',style: AppTextStyles.body,),
+              Text(
+                '- Open your terminal or Git Bash',
+                style: AppTextStyles.body,
+              ),
               const Text('- Run the following command:'),
               const SizedBox(height: 8),
               Container(
@@ -69,7 +72,7 @@ class InfoScreen extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {
-                  RouteFunctions.navigateTo(context, '/screen2');
+                  RouteFunctions.navigateTo(context, '/products');
                 },
                 child: const Text('screen2'),
               ),

@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 
-
 class Screen2 extends StatefulWidget {
   const Screen2({super.key});
 
