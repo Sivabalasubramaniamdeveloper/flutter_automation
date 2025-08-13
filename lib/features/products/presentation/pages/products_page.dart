@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_automation/core/utils/toast_helper.dart';
 import 'package:flutter_automation/features/products/presentation/widgets/product_card.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../../../../locator.dart';
 import '../../data/cubit/product_cubit.dart';
 import '../../data/cubit/product_state.dart';
 
@@ -21,8 +23,10 @@ class _ProductsPageState extends State<ProductsPage> {
   }
 
   Future<void> fetchData() async {
+    SharedPreferences sharedPreference = getIt<SharedPreferences>();
     try {
       await context.read<ProductCubit>().fetchProducts();
+      sharedPreference.setString("initial", "initial Value");
     } catch (err) {
       showErrorToast(err.toString());
     }
@@ -36,13 +40,11 @@ class _ProductsPageState extends State<ProductsPage> {
         builder: (context, state) {
           if (state is ProductLoading) {
             return const Center(child: CircularProgressIndicator());
-          }
-          if (state is ProductError) {
+          } else if (state is ProductError) {
             return Center(
               child: Text(state.message, textAlign: TextAlign.center),
             );
-          }
-          if (state is ProductLoaded) {
+          } else if (state is ProductLoaded) {
             final items = state.products;
             if (items.isEmpty) {
               return const Center(child: Text('No products found'));
@@ -56,8 +58,9 @@ class _ProductsPageState extends State<ProductsPage> {
                 itemBuilder: (_, i) => ProductCard(product: items[i]),
               ),
             );
+          } else {
+            return const SizedBox.shrink();
           }
-          return const SizedBox.shrink();
         },
       ),
     );

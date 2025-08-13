@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_alice/alice.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:intl/intl.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'app.dart';
 import 'core/network/alice.dart';
+import 'locator.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,8 +16,22 @@ Future<void> main() async {
     DeviceOrientation.landscapeLeft,
     DeviceOrientation.landscapeRight,
   ]);
+  setupLocator();
+  changeAppIcon();
   await ScreenUtil.ensureScreenSize();
   final alice = Alice(showNotification: true);
   await dioProvider.initAlice(alice);
   runApp(OverlaySupport.global(child: MyApp()));
+}
+void changeAppIcon() async {
+  final now = DateTime.now();
+  final day = DateFormat('EEEE').format(now); // Monday, Tuesday, etc.
+
+  const platform = MethodChannel('app.icon.change');
+
+  if (day == 'Saturday' || day == 'Sunday') {
+    await platform.invokeMethod('setIcon', {'icon': 'weekend'});
+  } else {
+    await platform.invokeMethod('setIcon', {'icon': 'weekday'});
+  }
 }

@@ -4,10 +4,11 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'features/products/data/cubit/product_cubit.dart';
 import 'features/products/data/repositories/product_repository.dart';
 import 'features/products/data/services/product_service.dart';
+import 'locator.dart';
 
 List<SingleChildWidget> getAppProviders(Connectivity? connectivity) {
-  final productService = ProductService();
-  final productRepository = ProductRepository(productService);
+  final productRepository = getIt<ProductRepository>();
+
   return [
     // Repositories
     RepositoryProvider.value(value: productRepository),
