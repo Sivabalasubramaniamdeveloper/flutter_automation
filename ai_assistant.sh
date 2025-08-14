@@ -62,6 +62,7 @@ while true; do
             read -p "📄 Enter the folder path where $FILE_NAME must be created (eg: features/screens ): " FOLDER_PATH
             echo "$CODE" > "lib/$FOLDER_PATH/$FILE_NAME.dart"
             echo "✅ Dart file created: lib/$FOLDER_PATH/$FILE_NAME.dart"
+            git add -f lib/"$FOLDER_PATH"/"$FILE_NAME.dart"
             ;;
 
         3)
