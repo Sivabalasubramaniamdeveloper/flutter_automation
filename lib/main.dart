@@ -8,7 +8,7 @@ import 'package:intl/intl.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'app.dart';
 import 'core/network/alice.dart';
-import 'locator.dart';
+import 'instance/locator.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

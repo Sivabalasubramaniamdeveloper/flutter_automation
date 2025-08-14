@@ -3,7 +3,7 @@ import 'package:flutter_automation/core/utils/toast_helper.dart';
 import 'package:flutter_automation/features/products/presentation/widgets/product_card.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../../../../locator.dart';
+import '../../../../instance/locator.dart';
 import '../../data/cubit/product_cubit.dart';
 import '../../data/cubit/product_state.dart';
 
