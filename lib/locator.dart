@@ -12,12 +12,12 @@ Future<void> setupLocator() async {
   //==================================
   // Register Services
   //==================================
-  getIt.registerLazySingleton<ProductService>(() => ProductService());
+  getIt.registerLazySingleton<ProductServiceImp>(() => ProductServiceImp());
 
   //==================================
   // Register Repositories
   //==================================
-  getIt.registerLazySingleton<ProductRepository>(
-    () => ProductRepository(getIt<ProductService>()),
+  getIt.registerLazySingleton<ProductRepositoryImp>(
+    () => ProductRepositoryImp(getIt<ProductServiceImp>()),
   );
 }
