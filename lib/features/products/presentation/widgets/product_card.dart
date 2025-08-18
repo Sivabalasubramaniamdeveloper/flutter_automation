@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../../data/models/product_model.dart';
 
@@ -25,9 +24,13 @@ class ProductCard extends StatelessWidget {
           maxLines: 2,
           overflow: TextOverflow.ellipsis,
         ),
-        subtitle: Text('${product.category} • ⭐ ${product.rating} (${product.ratingCount})'),
-        trailing: Text('\$${product.price.toStringAsFixed(2)}',
-            style: const TextStyle(fontWeight: FontWeight.bold)),
+        subtitle: Text(
+          '${product.category} • ⭐ ${product.rating} (${product.ratingCount})',
+        ),
+        trailing: Text(
+          '\$${product.price.toStringAsFixed(2)}',
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
         onTap: () {
           // Navigate to details if you add a details page later
         },

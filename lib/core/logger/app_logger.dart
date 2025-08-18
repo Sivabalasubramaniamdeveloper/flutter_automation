@@ -1,0 +1,88 @@
+import 'dart:io';
+import 'package:logger/logger.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:intl/intl.dart';
+
+class AppLogger {
+  static final Logger _logger = Logger(
+    printer: PrettyPrinter(
+      methodCount: 2, // number of method calls to be displayed
+      errorMethodCount: 8, // number of method calls if stacktrace is provided
+      lineLength: 120, // width of the output
+      colors: true, // colorful log messages
+      printEmojis: true, // prints emoji for log levels
+    ),
+  );
+
+  // Debug log
+  static void d(dynamic message, [dynamic error, StackTrace? stackTrace]) {
+    _logger.d(message, error: error, stackTrace: stackTrace);
+    _saveToFile("DEBUG", message.toString());
+  }
+
+  // Info log
+  static void i(dynamic message, [dynamic error, StackTrace? stackTrace]) {
+    _logger.i(message, error: error, stackTrace: stackTrace);
+    _saveToFile("INFO", message.toString());
+  }
+
+  // Warning log
+  static void w(dynamic message, [dynamic error, StackTrace? stackTrace]) {
+    _logger.w(message, error: error, stackTrace: stackTrace);
+    _saveToFile("WARNING", message.toString());
+  }
+
+  // Error log
+  static void e(dynamic message, [dynamic error, StackTrace? stackTrace]) {
+    _logger.e(message, error: error, stackTrace: stackTrace);
+    _saveToFile("ERROR", message.toString());
+  }
+
+  // Custom logger with tag
+  static Future<void> appLogger(String tag, String message) async {
+    final now = DateFormat("yyyy-MM-dd HH:mm:ss").format(DateTime.now());
+    final logEntry = "[$now] [$tag] $message";
+    _logger.t(logEntry); // log with TRACE level
+    await _saveToFile(tag, message);
+  }
+
+  // Save logs into a file
+  static Future<void> _saveToFile(String level, String message) async {
+    try {
+      final dir = await getApplicationDocumentsDirectory();
+      final file = File("${dir.path}/app_logs.txt");
+      final now = DateFormat("yyyy-MM-dd HH:mm:ss").format(DateTime.now());
+      final logEntry = "[$now] [$level] $message\n";
+      await file.writeAsString(logEntry, mode: FileMode.append);
+    } catch (e) {
+      _logger.e("Failed to write log to file", error: e);
+    }
+  }
+
+  // Read logs
+  static Future<String> readLogs() async {
+    try {
+      final dir = await getApplicationDocumentsDirectory();
+      final file = File("${dir.path}/app_logs.txt");
+      if (!await file.exists()) return "No logs found.";
+      print("file.readAsString()");
+      print(file.readAsString().then((onValue) => print(onValue)));
+      return await file.readAsString();
+    } catch (e) {
+      return "Failed to read logs: $e";
+    }
+  }
+
+  // Clear logs
+  static Future<void> clearLogs() async {
+    try {
+      final dir = await getApplicationDocumentsDirectory();
+      final file = File("${dir.path}/app_logs.txt");
+      if (await file.exists()) {
+        await file.writeAsString("");
+      }
+    } catch (e) {
+      _logger.e("Failed to clear logs", error: e);
+    }
+  }
+}

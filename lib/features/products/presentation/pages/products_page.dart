@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_automation/core/utils/toast_helper.dart';
 import 'package:flutter_automation/features/products/presentation/widgets/product_card.dart';
+import 'package:flutter_automation/core/logger/app_logger.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import '../../../../instance/app_lifecycle_handler.dart';
+import '../../../../instance/locator.dart';
 import '../../data/cubit/product_cubit.dart';
 import '../../data/cubit/product_state.dart';
 
@@ -13,18 +16,41 @@ class ProductsPage extends StatefulWidget {
 }
 
 class _ProductsPageState extends State<ProductsPage> {
+  DateTime? _pausedTime;
+  final Duration refreshAfter = const Duration(seconds: 10);
   @override
   void initState() {
     super.initState();
-    // Trigger fetch on load
+    AppLifecycleHandler(
+      onChange: (state) {
+        if (state == AppLifecycleState.resumed) {
+          if (_pausedTime != null) {
+            final diff = DateTime.now().difference(_pausedTime!);
+            print("diff");
+            print(diff);
+            if (diff >= refreshAfter) {
+              fetchData();
+            }
+          }
+        } else if (state == AppLifecycleState.detached) {
+          return;
+        } else {
+          _pausedTime = DateTime.now();
+          print("sssssssssssssssssssssssssssssssssssssssssssssssssss");
+        }
+      },
+    );
     fetchData();
   }
 
   Future<void> fetchData() async {
+    SharedPreferences sharedPreference = getIt<SharedPreferences>();
     try {
       await context.read<ProductCubit>().fetchProducts();
+      sharedPreference.setString("initial", "initial Value");
+      AppLogger.appLogger("Insert", sharedPreference.getString("initial")!);
     } catch (err) {
-      showErrorToast(err.toString());
+      // showErrorToast(err.toString());
     }
   }
 
@@ -36,13 +62,11 @@ class _ProductsPageState extends State<ProductsPage> {
         builder: (context, state) {
           if (state is ProductLoading) {
             return const Center(child: CircularProgressIndicator());
-          }
-          if (state is ProductError) {
+          } else if (state is ProductError) {
             return Center(
               child: Text(state.message, textAlign: TextAlign.center),
             );
-          }
-          if (state is ProductLoaded) {
+          } else if (state is ProductLoaded) {
             final items = state.products;
             if (items.isEmpty) {
               return const Center(child: Text('No products found'));
@@ -56,8 +80,9 @@ class _ProductsPageState extends State<ProductsPage> {
                 itemBuilder: (_, i) => ProductCard(product: items[i]),
               ),
             );
+          } else {
+            return const SizedBox.shrink();
           }
-          return const SizedBox.shrink();
         },
       ),
     );

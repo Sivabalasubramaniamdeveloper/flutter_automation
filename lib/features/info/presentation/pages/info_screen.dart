@@ -1,11 +1,20 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_automation/config/router/route_functions.dart';
+import 'package:flutter_automation/core/constants/app_strings.dart';
 import 'package:flutter_automation/core/constants/app_text_styles.dart';
+import 'package:flutter_automation/core/logger/app_logger.dart';
 import '../../../../core/widgets/bullet_points_text.dart';
 
-class InfoScreen extends StatelessWidget {
+class InfoScreen extends StatefulWidget {
   const InfoScreen({super.key});
 
+  @override
+  State<InfoScreen> createState() => _InfoScreenState();
+}
+
+class _InfoScreenState extends State<InfoScreen> {
+  List<int> numbers = [1, 2, 3];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,6 +33,11 @@ class InfoScreen extends StatelessWidget {
                 '🚀 Welcome to Flutter Automation App',
                 style: AppTextStyles.heading,
               ),
+              Text(AppStrings.welcomeBack, style: AppTextStyles.heading),
+              Text(AppStrings.welcomeBack, style: AppTextStyles.heading),
+              Text(AppStrings.username, style: AppTextStyles.heading),
+
+              // Text(numbers[11].toString()),
               const SizedBox(height: 20),
               const Text(
                 '🔧 How to use:',
@@ -78,11 +92,13 @@ class InfoScreen extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {
-                  RouteFunctions.pushNamedAndRemoveUntil(context, '/screen3', {
-                    's': "sss",
-                  });
+                  context.setLocale(Locale('ta', ''));
+                  AppLogger.appLogger(
+                    "change language",
+                    context.locale.toString(),
+                  );
                 },
-                child: const Text('screen3'),
+                child: const Text('change language'),
               ),
             ],
           ),

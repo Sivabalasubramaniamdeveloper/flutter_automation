@@ -45,5 +45,4 @@ class Product {
       ratingCount: (ratingMap['count'] ?? 0) as int,
     );
   }
-
 }
