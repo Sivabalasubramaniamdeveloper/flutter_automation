@@ -1,8 +1,11 @@
 //	All user-visible strings and labels (e.g., "Login", "Welcome").
+import 'package:easy_localization/easy_localization.dart';
+
 class AppStrings {
-  static const String loginTitle = "Login to your Account";
-  static const String welcomeBack = "Welcome Back!";
-  static const String emailHint = "Enter your email";
+  static String get welcomeBack => 'welcome_back'.tr();
+  static String get loginToYourAccount => 'login_to_your_account'.tr();
+  static String get username => 'username'.tr();
+  static String get siteName => 'siteName'.tr();
 
   // ======================
   //  API Call Methods

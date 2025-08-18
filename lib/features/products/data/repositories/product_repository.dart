@@ -13,6 +13,8 @@ class ProductRepositoryImp extends ProductRepository {
   @override
   Future<List<Product>> getProducts() async {
     final response = await _service.fetchProductsRaw('s');
+    print("sssssssssssssssss");
+    print(response);
     final responseData = json.decode(response.toString());
     final productsList = (responseData['products'] as List)
         .map((e) => Product.fromMap(e))

@@ -6,7 +6,6 @@ import 'package:flutter_automation/features/info/presentation/pages/screen2.dart
 import 'package:flutter_automation/features/info/presentation/pages/screen3.dart';
 import 'package:flutter_automation/features/products/presentation/pages/products_page.dart';
 
-
 class AppRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -38,15 +37,14 @@ class AppRouter {
         const end = Offset.zero;
         const curve = Curves.easeInOut;
 
-        var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+        var tween = Tween(
+          begin: begin,
+          end: end,
+        ).chain(CurveTween(curve: curve));
 
-        return SlideTransition(
-          position: animation.drive(tween),
-          child: child,
-        );
+        return SlideTransition(position: animation.drive(tween), child: child);
       },
       transitionDuration: const Duration(milliseconds: 400),
     );
   }
-
 }

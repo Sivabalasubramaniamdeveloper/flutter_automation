@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../instance/locator.dart';
 import '../utils/toast_helper.dart';
 import 'alice.dart';
 import 'package:flutter_timezone/flutter_timezone.dart';
@@ -91,8 +92,8 @@ class CustomApiCallService {
                   actions: <Widget>[
                     CupertinoDialogAction(
                       onPressed: () async {
-                        final storedData =
-                            await SharedPreferences.getInstance();
+                        SharedPreferences storedData =
+                            getIt<SharedPreferences>();
                         await storedData.clear();
                         // await dioProvider.navigatorKey?.currentState
                         //     ?.pushAndRemoveUntil(

@@ -1,4 +1,5 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,21 +27,9 @@ class MyApp extends StatelessWidget {
             theme: AppTheme.getNaturalTheme(),
             initialRoute: RouteNames.home,
             onGenerateRoute: AppRouter.generateRoute,
-            supportedLocales: [
-              Locale('en'),
-              Locale('zh'),
-              Locale('fr'),
-              Locale('es'),
-              Locale('de'),
-              Locale('ru'),
-              Locale('ja'),
-              Locale('ar'),
-              Locale('fa'),
-              Locale("es"),
-              Locale("it"),
-              Locale("ta"),
-              Locale('ms'),
-            ],
+            localizationsDelegates: context.localizationDelegates,
+            supportedLocales: context.supportedLocales,
+            locale: context.locale,
             debugShowCheckedModeBanner: false,
           );
         },

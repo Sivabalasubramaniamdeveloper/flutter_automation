@@ -33,9 +33,7 @@ ThemeData natureTheme = ThemeData(
     style: ElevatedButton.styleFrom(
       backgroundColor: Colors.green[700],
       foregroundColor: Colors.white,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
     ),
   ),
 );
