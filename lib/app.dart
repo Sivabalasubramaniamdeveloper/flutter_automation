@@ -8,6 +8,7 @@ import 'config/router/route_generator.dart';
 import 'config/router/route_names.dart';
 import 'config/theme/app_theme.dart';
 import 'core/network/alice.dart';
+import 'core/network/internet_connectivity.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: getAppProviders(Connectivity()),
+      providers: getAppProviders(),
       child: ScreenUtilInit(
         minTextAdapt: true,
         splitScreenMode: true,
@@ -31,6 +32,31 @@ class MyApp extends StatelessWidget {
             supportedLocales: context.supportedLocales,
             locale: context.locale,
             debugShowCheckedModeBanner: false,
+            builder: (context, child) {
+              return BlocListener<ConnectivityCubit, ConnectivityStatus>(
+                listener: (context, state) {
+                  if (state == ConnectivityStatus.disconnected) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text("No internet connection ❌"),
+                        backgroundColor: Colors.red,
+                        duration: Duration(days: 1),
+                      ),
+                    );
+                  } else {
+                    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text("Back online "),
+                        backgroundColor: Colors.green,
+                        duration: Duration(seconds: 2),
+                      ),
+                    );
+                  }
+                },
+                child: child!,
+              );
+            },
           );
         },
       ),

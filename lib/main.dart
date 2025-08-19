@@ -8,6 +8,7 @@ import 'package:flutter_automation/core/widgets/custom_error.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'app.dart';
+import 'config/flavor/flavor_config.dart';
 import 'core/network/alice.dart';
 import 'instance/locator.dart';
 
@@ -50,19 +51,18 @@ Future<void> main() async {
       //   return true;
       // };
       await ScreenUtil.ensureScreenSize();
-      final alice = Alice(showNotification: true);
+      final alice = Alice(showNotification: FlavorConfig.isDevelopment);
       await dioProvider.initAlice(alice);
       runApp(
         EasyLocalization(
           supportedLocales: [Locale('ta', ''), Locale('en', '')],
           path: 'assets/translations',
           fallbackLocale: Locale('ta'),
-          child: OverlaySupport.global(child: MyApp()),
+          child: FlavorConfig.isDevelopment
+              ? OverlaySupport.global(child: MyApp())
+              : MyApp(),
         ),
       );
-      Future.delayed(Duration(seconds: 1), () {
-        throw Exception("Boom! inside Future");
-      });
     },
     (error, stack) {
       AppLogger.e(error.toString(), "runZonedGuarded");

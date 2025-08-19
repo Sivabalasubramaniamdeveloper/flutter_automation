@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:flutter_automation/config/flavor/flavor_config.dart';
 import 'package:logger/logger.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:intl/intl.dart';
@@ -13,28 +14,27 @@ class AppLogger {
       printEmojis: true, // prints emoji for log levels
     ),
   );
-
   // Debug log
   static void d(dynamic message, [dynamic error, StackTrace? stackTrace]) {
-    _logger.d(message, error: error, stackTrace: stackTrace);
+   if(FlavorConfig.isDevelopment) _logger.d(message, error: error, stackTrace: stackTrace);
     _saveToFile("DEBUG", message.toString());
   }
 
   // Info log
   static void i(dynamic message, [dynamic error, StackTrace? stackTrace]) {
-    _logger.i(message, error: error, stackTrace: stackTrace);
+    if(FlavorConfig.isDevelopment) _logger.i(message, error: error, stackTrace: stackTrace);
     _saveToFile("INFO", message.toString());
   }
 
   // Warning log
   static void w(dynamic message, [dynamic error, StackTrace? stackTrace]) {
-    _logger.w(message, error: error, stackTrace: stackTrace);
+    if(FlavorConfig.isDevelopment) _logger.w(message, error: error, stackTrace: stackTrace);
     _saveToFile("WARNING", message.toString());
   }
 
   // Error log
   static void e(dynamic message, [dynamic error, StackTrace? stackTrace]) {
-    _logger.e(message, error: error, stackTrace: stackTrace);
+    if(FlavorConfig.isDevelopment) _logger.e(message, error: error, stackTrace: stackTrace);
     _saveToFile("ERROR", message.toString());
   }
 
@@ -42,7 +42,7 @@ class AppLogger {
   static Future<void> appLogger(String tag, String message) async {
     final now = DateFormat("yyyy-MM-dd HH:mm:ss").format(DateTime.now());
     final logEntry = "[$now] [$tag] $message";
-    _logger.t(logEntry); // log with TRACE level
+    if(FlavorConfig.isDevelopment) _logger.t(logEntry); // log with TRACE level
     await _saveToFile(tag, message);
   }
 
@@ -55,7 +55,7 @@ class AppLogger {
       final logEntry = "[$now] [$level] $message\n";
       await file.writeAsString(logEntry, mode: FileMode.append);
     } catch (e) {
-      _logger.e("Failed to write log to file", error: e);
+      if(FlavorConfig.isDevelopment) _logger.e("Failed to write log to file", error: e);
     }
   }
 
@@ -65,8 +65,6 @@ class AppLogger {
       final dir = await getApplicationDocumentsDirectory();
       final file = File("${dir.path}/app_logs.txt");
       if (!await file.exists()) return "No logs found.";
-      print("file.readAsString()");
-      print(file.readAsString().then((onValue) => print(onValue)));
       return await file.readAsString();
     } catch (e) {
       return "Failed to read logs: $e";
@@ -82,7 +80,7 @@ class AppLogger {
         await file.writeAsString("");
       }
     } catch (e) {
-      _logger.e("Failed to clear logs", error: e);
+      if(FlavorConfig.isDevelopment) _logger.e("Failed to clear logs", error: e);
     }
   }
 }
