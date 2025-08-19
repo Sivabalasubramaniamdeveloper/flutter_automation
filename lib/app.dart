@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: getAppProviders(Connectivity()),
+      providers: getAppProviders(),
       child: ScreenUtilInit(
         minTextAdapt: true,
         splitScreenMode: true,

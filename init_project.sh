@@ -10,14 +10,15 @@ flutter pub get
 # Collect user input
 read -p "📢 Enter your app name: " APP_NAME
 read -p "📢 Enter your base package name (e.g., com.example.app): " PACKAGE_NAME
-read -p "📢 Enter this flutter folder name (e.g., flutter_automation): " DART_PACKAGE
+#read -p "📢 Enter this flutter folder name (e.g., flutter_automation): " DART_PACKAGE
 read -p "📢 Enter path to app icon (optional, PNG 512x512): " ICON_PATH
 read -p "📢 Enter comma-separated flavor names (e.g., dev,sit,uat,prod): " FLAVOR_INPUT
 
 echo "✅ App Name: $APP_NAME"
 echo "✅ Package Name: $PACKAGE_NAME"
+DART_PACKAGE='flutter_automation'
 echo "✅ Dart Import Name: $DART_PACKAGE"
-[ -n "$ICON_PATH" ] && echo "✅ Icon Path: $ICON_PATH" || echo "❌ No icon provided"
+[ -n "$ICON_PATH" ] && echo "✅ Icon Path: $ICON_PATH" || echo "Setting default icon..."
 echo "✅ Flavors: $FLAVOR_INPUT"
 
 
@@ -29,7 +30,10 @@ if [ -n "$APP_NAME" ]; then
   echo "Renaming app to $APP_NAME..."
   flutter pub run rename setAppName --targets ios,android --value "$APP_NAME"
 else
-  echo " Skipping app name rename."
+  APP_NAME='exampleapp'
+  echo "Renaming app to $APP_NAME..."
+  flutter pub run rename setAppName --targets ios,android --value "$APP_NAME"
+  echo "Setting default app name."
 fi
 
 # Rename package
@@ -37,7 +41,10 @@ if [ -n "$PACKAGE_NAME" ]; then
   echo "Renaming bundle ID to $PACKAGE_NAME..."
   flutter pub run rename setBundleId --targets android --value "$PACKAGE_NAME"
 else
-  echo "️ Skipping bundle ID rename."
+  PACKAGE_NAME='com.example.app'
+  echo "Renaming bundle ID to $PACKAGE_NAME..."
+  flutter pub run rename setBundleId --targets android --value "$PACKAGE_NAME"
+  echo "Setting default package name."
 fi
 
 # Launcher icon
@@ -52,7 +59,7 @@ EOL
   flutter pub run flutter_launcher_icons:main -f pubspec_launcher_icons.yaml
   rm pubspec_launcher_icons.yaml
 else
-  echo "️ Skipping icon setup."
+  echo "Setting default App icon...."
 fi
 
 # --------- Generate lib/flavor folder and config ---------
@@ -64,8 +71,12 @@ TITLE_SWITCH=""
 IS_DEV_SWITCH=""
 IS_APP_SWITCH=""
   # Remove existing blocks
+# Remove flavorDimensions line
 sed -i '' '/flavorDimensions/d' "$GRADLE_FILE"
-sed -i '' '/productFlavors {/,/^        }/d' "$GRADLE_FILE"
+
+# Remove entire productFlavors block
+sed -i '' '/productFlavors {/,/}/d' "$GRADLE_FILE"
+
 for FLAVOR in "${FLAVORS[@]}"; do
   FLAVOR_ENUMS+="$FLAVOR, "
   TITLE_SWITCH+="      case Flavor.$FLAVOR:
@@ -266,6 +277,8 @@ class MainActivity: FlutterActivity() {
 EOL
 
 echo " Created MainActivity.kt with correct package declaration"
+
+git add .
 
 MAIN_DART_FILE="lib/app.dart"
 

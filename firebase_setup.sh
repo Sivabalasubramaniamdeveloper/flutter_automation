@@ -37,12 +37,12 @@ if [[ "$FIREBASE_OPTION" == "yes" || "$FIREBASE_OPTION" == "y" ]]; then
   firebase login
 
   # Get inputs
-#  read -p "Enter your base project name: " PROJECT_NAME
+  read -p "Enter your base project name: " PROJECT_NAME
   read -p "Enter your base bundle ID (e.g., com.example.app): " BASE_BUNDLE_ID
   read -p "Enter flavors (space-separated, e.g., sit uat prod): " FLAVORS
-#  RAND_NUM=$((RANDOM % 9000 + 1000))
-#  PROJECT_ID="${PROJECT_NAME,,}-${RAND_NUM}"
-  PROJECT_ID='oilrig-7784'
+  RAND_NUM=$((RANDOM % 9000 + 1000))
+  PROJECT_ID="${PROJECT_NAME,,}-${RAND_NUM}"
+#  PROJECT_ID='oilrig-7784'
   echo "🚀 Creating Firebase Project: $PROJECT_ID"
 #  firebase projects:create "$PROJECT_ID" --display-name "${PROJECT_NAME^}" || {
 #    echo "❌ Failed to create project!";

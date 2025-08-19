@@ -7,7 +7,7 @@ import 'features/products/data/cubit/product_cubit.dart';
 import 'features/products/data/repositories/product_repository.dart';
 import 'instance/locator.dart';
 
-List<SingleChildWidget> getAppProviders(Connectivity? connectivity) {
+List<SingleChildWidget> getAppProviders() {
   final productRepository = getIt<ProductRepository>();
 
   return [
