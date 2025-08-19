@@ -9,7 +9,7 @@ class ConnectivityCubit extends Cubit<ConnectivityStatus> {
   late StreamSubscription _subscription;
 
   ConnectivityCubit(this._internetConnection)
-      : super(ConnectivityStatus.connected) {
+    : super(ConnectivityStatus.connected) {
     _subscription = _internetConnection.onStatusChange.listen((status) {
       if (status == InternetStatus.connected) {
         emit(ConnectivityStatus.connected);

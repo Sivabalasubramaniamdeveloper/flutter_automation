@@ -16,8 +16,6 @@ List<SingleChildWidget> getAppProviders(Connectivity? connectivity) {
 
     // Core Cubits
     BlocProvider(create: (_) => ProductCubit(productRepository)),
-    BlocProvider(
-      create: (_) => ConnectivityCubit(InternetConnection()),
-    ),
+    BlocProvider(create: (_) => ConnectivityCubit(InternetConnection())),
   ];
 }

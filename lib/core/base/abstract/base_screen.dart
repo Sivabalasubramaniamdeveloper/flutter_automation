@@ -23,11 +23,11 @@ abstract class BaseScreen extends StatelessWidget {
     return Scaffold(
       appBar: showAppBar
           ? AppBar(
-        title: Text(title),
-        centerTitle: centerTitle,
-        actions: actions,
-        leading: leading,
-      )
+              title: Text(title),
+              centerTitle: centerTitle,
+              actions: actions,
+              leading: leading,
+            )
           : null,
       body: buildBody(context),
       floatingActionButton: floatingActionButton,

@@ -15,7 +15,6 @@ class ProductsPage extends BaseScreen {
   @override
   String get title => "Product page";
 
-
   @override
   List<Widget>? get actions => [
     IconButton(icon: const Icon(Icons.settings), onPressed: () {}),

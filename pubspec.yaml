@@ -53,10 +53,10 @@ dependencies:
   path_provider: ^2.1.5
   easy_localization: ^3.0.8
   logger: ^2.6.1
-
-  provider: any
   overlay_support: any
   internet_connection_checker_plus: ^2.7.2
+
+  provider: any
 dev_dependencies:
   flutter_test:
     sdk: flutter

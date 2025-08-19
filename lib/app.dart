@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
             title: "Flutter Automation",
             navigatorKey: dioProvider.navigatorKey,
             theme: AppTheme.getNaturalTheme(),
-            initialRoute: RouteNames.screen1,
+            initialRoute: RouteNames.home,
             onGenerateRoute: AppRouter.generateRoute,
             localizationsDelegates: context.localizationDelegates,
             supportedLocales: context.supportedLocales,
