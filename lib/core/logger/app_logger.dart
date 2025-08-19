@@ -65,8 +65,6 @@ class AppLogger {
       final dir = await getApplicationDocumentsDirectory();
       final file = File("${dir.path}/app_logs.txt");
       if (!await file.exists()) return "No logs found.";
-      print("file.readAsString()");
-      print(file.readAsString().then((onValue) => print(onValue)));
       return await file.readAsString();
     } catch (e) {
       return "Failed to read logs: $e";

@@ -60,9 +60,6 @@ Future<void> main() async {
           child: OverlaySupport.global(child: MyApp()),
         ),
       );
-      Future.delayed(Duration(seconds: 1), () {
-        throw Exception("Boom! inside Future");
-      });
     },
     (error, stack) {
       AppLogger.e(error.toString(), "runZonedGuarded");

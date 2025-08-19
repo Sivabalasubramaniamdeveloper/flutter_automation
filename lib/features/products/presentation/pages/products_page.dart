@@ -3,31 +3,52 @@ import 'package:flutter_automation/features/products/presentation/widgets/produc
 import 'package:flutter_automation/core/logger/app_logger.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../../../core/base/abstract/base_screen.dart';
 import '../../../../instance/app_lifecycle_handler.dart';
 import '../../../../instance/locator.dart';
 import '../../data/cubit/product_cubit.dart';
 import '../../data/cubit/product_state.dart';
 
-class ProductsPage extends StatefulWidget {
+class ProductsPage extends BaseScreen {
   const ProductsPage({super.key});
 
   @override
-  State<ProductsPage> createState() => _ProductsPageState();
+  String get title => "Product page";
+
+
+  @override
+  List<Widget>? get actions => [
+    IconButton(icon: const Icon(Icons.settings), onPressed: () {}),
+  ];
+
+  @override
+  Widget? get floatingActionButton =>
+      FloatingActionButton(onPressed: () {}, child: const Icon(Icons.add));
+
+  @override
+  Widget buildBody(BuildContext context) {
+    return _ProductsBody();
+  }
 }
 
-class _ProductsPageState extends State<ProductsPage> {
+class _ProductsBody extends StatefulWidget {
+  @override
+  State<_ProductsBody> createState() => _ProductsBodyState();
+}
+
+class _ProductsBodyState extends State<_ProductsBody> {
   DateTime? _pausedTime;
   final Duration refreshAfter = const Duration(seconds: 10);
+
   @override
   void initState() {
     super.initState();
+
     AppLifecycleHandler(
       onChange: (state) {
         if (state == AppLifecycleState.resumed) {
           if (_pausedTime != null) {
             final diff = DateTime.now().difference(_pausedTime!);
-            print("diff");
-            print(diff);
             if (diff >= refreshAfter) {
               fetchData();
             }
@@ -36,10 +57,10 @@ class _ProductsPageState extends State<ProductsPage> {
           return;
         } else {
           _pausedTime = DateTime.now();
-          print("sssssssssssssssssssssssssssssssssssssssssssssssssss");
         }
       },
     );
+
     fetchData();
   }
 
@@ -50,41 +71,38 @@ class _ProductsPageState extends State<ProductsPage> {
       sharedPreference.setString("initial", "initial Value");
       AppLogger.appLogger("Insert", sharedPreference.getString("initial")!);
     } catch (err) {
-      // showErrorToast(err.toString());
+      //  showErrorToast(err.toString());
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Fake Store')),
-      body: BlocBuilder<ProductCubit, ProductState>(
-        builder: (context, state) {
-          if (state is ProductLoading) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (state is ProductError) {
-            return Center(
-              child: Text(state.message, textAlign: TextAlign.center),
-            );
-          } else if (state is ProductLoaded) {
-            final items = state.products;
-            if (items.isEmpty) {
-              return const Center(child: Text('No products found'));
-            }
-            return RefreshIndicator(
-              onRefresh: fetchData,
-              child: ListView.separated(
-                padding: const EdgeInsets.all(12),
-                itemCount: items.length,
-                separatorBuilder: (_, __) => const SizedBox(height: 10),
-                itemBuilder: (_, i) => ProductCard(product: items[i]),
-              ),
-            );
-          } else {
-            return const SizedBox.shrink();
+    return BlocBuilder<ProductCubit, ProductState>(
+      builder: (context, state) {
+        if (state is ProductLoading) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (state is ProductError) {
+          return Center(
+            child: Text(state.message, textAlign: TextAlign.center),
+          );
+        } else if (state is ProductLoaded) {
+          final items = state.products;
+          if (items.isEmpty) {
+            return const Center(child: Text('No products found'));
           }
-        },
-      ),
+          return RefreshIndicator(
+            onRefresh: fetchData,
+            child: ListView.separated(
+              padding: const EdgeInsets.all(12),
+              itemCount: items.length,
+              separatorBuilder: (_, __) => const SizedBox(height: 10),
+              itemBuilder: (_, i) => ProductCard(product: items[i]),
+            ),
+          );
+        } else {
+          return const SizedBox.shrink();
+        }
+      },
     );
   }
 }
