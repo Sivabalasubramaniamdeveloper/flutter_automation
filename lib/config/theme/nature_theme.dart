@@ -1,38 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_automation/core/constants/app_colors.dart';
+
+import '../../core/constants/app_text_styles.dart';
 
 ThemeData natureTheme = ThemeData(
   brightness: Brightness.light,
-  primaryColor: Colors.green[700],
+  primaryColor: AppColors.naturalBackground,
   scaffoldBackgroundColor: const Color(0xFFF4F1EE),
   appBarTheme: AppBarTheme(
-    backgroundColor: Colors.green[700],
+    backgroundColor: AppColors.naturalBackground,
     titleTextStyle: const TextStyle(
-      color: Colors.white,
+      color: AppColors.whiteColor,
       fontSize: 20,
       fontWeight: FontWeight.bold,
     ),
-    iconTheme: const IconThemeData(color: Colors.white),
+    iconTheme: const IconThemeData(color: AppColors.whiteColor),
   ),
   colorScheme: ColorScheme(
     brightness: Brightness.light,
-    primary: Colors.green[700]!,
-    onPrimary: Colors.white,
-    secondary: Colors.brown[400]!,
-    onSecondary: Colors.white,
-    error: Colors.red,
-    onError: Colors.white,
-    surface: Colors.white,
-    onSurface: Colors.black,
+    primary: AppColors.naturalBackground,
+    onPrimary: AppColors.whiteColor,
+    secondary: AppColors.naturalSecondary,
+    onSecondary: AppColors.whiteColor,
+    error: AppColors.redColor,
+    onError: AppColors.whiteColor,
+    surface: AppColors.whiteColor,
+    onSurface: AppColors.blackColor,
   ),
-  textTheme: const TextTheme(
-    bodyLarge: TextStyle(color: Colors.black87),
-    bodyMedium: TextStyle(color: Colors.black54),
-    headlineSmall: TextStyle(color: Colors.green),
+  textTheme: TextTheme(
+    bodyLarge: AppTextStyles.body,
+    bodyMedium: AppTextStyles.caption,
+  ),
+  floatingActionButtonTheme: FloatingActionButtonThemeData(
+    backgroundColor: AppColors.naturalBackground,
+    elevation: 2,
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(
-      backgroundColor: Colors.green[700],
-      foregroundColor: Colors.white,
+      backgroundColor: AppColors.naturalBackground,
+      foregroundColor: AppColors.whiteColor,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
     ),
   ),

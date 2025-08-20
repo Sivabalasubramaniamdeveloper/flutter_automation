@@ -88,6 +88,12 @@ class _InfoScreenState extends State<InfoScreen> {
                 onPressed: () {
                   RouteFunctions.navigateTo(context, '/products');
                 },
+                child: const Text('products'),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  RouteFunctions.navigateTo(context, '/screen2');
+                },
                 child: const Text('screen2'),
               ),
               ElevatedButton(

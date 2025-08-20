@@ -4,6 +4,7 @@ import 'package:flutter_automation/core/logger/app_logger.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../core/base/abstract/base_screen.dart';
+import '../../../../core/utils/toast_helper.dart';
 import '../../../../instance/app_lifecycle_handler.dart';
 import '../../../../instance/locator.dart';
 import '../../data/cubit/product_cubit.dart';
@@ -70,7 +71,7 @@ class _ProductsBodyState extends State<_ProductsBody> {
       sharedPreference.setString("initial", "initial Value");
       AppLogger.appLogger("Insert", sharedPreference.getString("initial")!);
     } catch (err) {
-      //  showErrorToast(err.toString());
+      showErrorToast(err.toString());
     }
   }
 
@@ -82,7 +83,15 @@ class _ProductsBodyState extends State<_ProductsBody> {
           return const Center(child: CircularProgressIndicator());
         } else if (state is ProductError) {
           return Center(
-            child: Text(state.message, textAlign: TextAlign.center),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(state.message, textAlign: TextAlign.center),
+                SizedBox(height: 10,),
+                ElevatedButton(onPressed: fetchData, child: Text("Refresh Again"))
+              ],
+            ),
           );
         } else if (state is ProductLoaded) {
           final items = state.products;
