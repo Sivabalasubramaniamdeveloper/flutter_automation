@@ -4,10 +4,10 @@ import '../../core/constants/app_text_styles.dart';
 
 ThemeData darkTheme = ThemeData(
   brightness: Brightness.dark,
-  primaryColor: AppColors.primary,
+  primaryColor: AppColors.darkPrimary,
   scaffoldBackgroundColor: AppColors.darkBackground,
   appBarTheme: AppBarTheme(
-    backgroundColor: AppColors.primary,
+    backgroundColor: AppColors.darkPrimary,
     titleTextStyle: AppTextStyles.heading.copyWith(color: Colors.white),
     iconTheme: const IconThemeData(color: Colors.white),
   ),
@@ -15,7 +15,10 @@ ThemeData darkTheme = ThemeData(
     bodyLarge: AppTextStyles.body,
     bodyMedium: AppTextStyles.caption,
   ),
+  floatingActionButtonTheme: FloatingActionButtonThemeData(
+    backgroundColor: AppColors.darkPrimary,elevation: 2
+  ),
   colorScheme: ColorScheme.fromSwatch(
     brightness: Brightness.dark,
-  ).copyWith(secondary: AppColors.secondary, error: AppColors.error),
+  ).copyWith(secondary: AppColors.darkSecondary, error: AppColors.error),
 );

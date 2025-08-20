@@ -1,6 +1,7 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_automation/core/utils/snackbar_helper.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'app_providers.dart';
@@ -36,22 +37,9 @@ class MyApp extends StatelessWidget {
               return BlocListener<ConnectivityCubit, ConnectivityStatus>(
                 listener: (context, state) {
                   if (state == ConnectivityStatus.disconnected) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text("No internet connection ❌"),
-                        backgroundColor: Colors.red,
-                        duration: Duration(days: 1),
-                      ),
-                    );
+                    SnackBarHelper.networkError(context, "No Internet Connection");
                   } else {
-                    ScaffoldMessenger.of(context).hideCurrentSnackBar();
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text("Back online "),
-                        backgroundColor: Colors.green,
-                        duration: Duration(seconds: 2),
-                      ),
-                    );
+                    SnackBarHelper.showSuccess(context, "Back Online");
                   }
                 },
                 child: child!,

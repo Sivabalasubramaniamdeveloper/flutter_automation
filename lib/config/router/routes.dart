@@ -10,7 +10,7 @@ class Routes {
     return {
       RouteNames.home: (context) => const InfoScreen(),
       RouteNames.screen1: (context) => const Screen1(),
-      RouteNames.screen2: (context) => const Screen2(),
+      RouteNames.screen2: (context) =>  Screen2(),
       RouteNames.screen3: (context) => const Screen3(),
     };
   }

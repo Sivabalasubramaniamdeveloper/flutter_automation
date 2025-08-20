@@ -1,4 +1,4 @@
-import 'dart:convert';
+import 'package:flutter_automation/core/logger/app_logger.dart';
 import '../models/product_model.dart';
 import '../services/product_service.dart';
 
@@ -7,19 +7,27 @@ abstract class ProductRepository {
 }
 
 class ProductRepositoryImp extends ProductRepository {
-  final ProductServiceImp _service;
+  final ProductService _service;
+
   ProductRepositoryImp(this._service);
 
   @override
   Future<List<Product>> getProducts() async {
-    final response = await _service.fetchProductsRaw('s');
-    print("sssssssssssssssss");
-    print(response);
-    final responseData = json.decode(response.toString());
-    final productsList = (responseData['products'] as List)
-        .map((e) => Product.fromMap(e))
-        .toList();
+    try {
+      final response = await _service.fetchProductsRaw('s');
+      final responseData = response.data;
 
-    return productsList;
+      if (responseData == null || responseData['products'] == null) {
+        throw Exception("Invalid API Response");
+      }
+
+      return (responseData['products'] as List)
+          .map((e) => Product.fromMap(e))
+          .toList();
+    } catch (e) {
+      AppLogger.e("Repository Error: $e","Repository Error:");
+      throw Exception("Failed to fetch products: $e");
+    }
   }
 }
+

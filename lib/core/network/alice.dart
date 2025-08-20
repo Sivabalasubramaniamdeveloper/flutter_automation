@@ -1,7 +1,10 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_alice/alice.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+
+import 'auto-retry.dart';
 
 class DioProvider {
   static final DioProvider _singleton = DioProvider._internal();
@@ -30,6 +33,11 @@ class DioProvider {
   initAlice(Alice aliceInstance) async {
     alice = aliceInstance;
     dio = Dio();
+    final connectivity = Connectivity();
+
+    dio.interceptors.add(
+      RetryOnConnectionChangeInterceptor(dio: dio, connectivity: connectivity),
+    );
     // final sslCertificate = await rootBundle.load(
     //   'assets/Certificates/sit_certificate.pem',
     // );
