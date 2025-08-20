@@ -21,9 +21,16 @@ echo "✅ Dart Import Name: $DART_PACKAGE"
 [ -n "$ICON_PATH" ] && echo "✅ Icon Path: $ICON_PATH" || echo "Setting default icon..."
 echo "✅ Flavors: $FLAVOR_INPUT"
 
-
+# Flavors
+if [ -n "$FLAVOR_INPUT" ]; then
 # Parse flavors into array
 IFS=',' read -ra FLAVORS <<< "$FLAVOR_INPUT"
+else
+  FLAVOR_INPUT='sit,uat,prod'
+# Parse flavors into array
+IFS=',' read -ra FLAVORS <<< "$FLAVOR_INPUT"
+fi
+
 
 # Rename app
 if [ -n "$APP_NAME" ]; then
@@ -79,18 +86,18 @@ sed -i '' '/productFlavors {/,/}/d' "$GRADLE_FILE"
 
 for FLAVOR in "${FLAVORS[@]}"; do
   FLAVOR_ENUMS+="$FLAVOR, "
-  TITLE_SWITCH+="      case Flavor.$FLAVOR:
+  TITLE_SWITCH+=" case Flavor.$FLAVOR:
   return '$APP_NAME ${FLAVOR^^}';"
 
   if [[ "$FLAVOR" == "prod" ]]; then
-    IS_DEV_SWITCH+="      case Flavor.$FLAVOR:
+    IS_DEV_SWITCH+="case Flavor.$FLAVOR:
     return false;"
   else
-    IS_DEV_SWITCH+="      case Flavor.$FLAVOR:
+    IS_DEV_SWITCH+="case Flavor.$FLAVOR:
      return true;"
   fi
 
-  IS_APP_SWITCH+="      case Flavor.$FLAVOR:
+  IS_APP_SWITCH+="case Flavor.$FLAVOR:
   return true;"
 done
 

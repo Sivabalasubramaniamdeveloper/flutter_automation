@@ -67,7 +67,7 @@ class _ProductsBodyState extends State<_ProductsBody> {
   Future<void> fetchData() async {
     SharedPreferences sharedPreference = getIt<SharedPreferences>();
     try {
-      await context.read<ProductCubit>().fetchProducts();
+      BlocProvider.of<ProductCubit>(context).fetchProducts();
       sharedPreference.setString("initial", "initial Value");
       AppLogger.appLogger("Insert", sharedPreference.getString("initial")!);
     } catch (err) {
@@ -88,8 +88,11 @@ class _ProductsBodyState extends State<_ProductsBody> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(state.message, textAlign: TextAlign.center),
-                SizedBox(height: 10,),
-                ElevatedButton(onPressed: fetchData, child: Text("Refresh Again"))
+                SizedBox(height: 10),
+                ElevatedButton(
+                  onPressed: fetchData,
+                  child: Text("Refresh Again"),
+                ),
               ],
             ),
           );
