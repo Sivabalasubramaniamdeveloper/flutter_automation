@@ -1,48 +1,100 @@
-class Product {
-  final int id;
-  final String title;
-  final double price;
-  final String description;
-  final String category;
-  final String image;
-  final double rating;
-  final int ratingCount;
+import 'package:equatable/equatable.dart';
+import 'package:json_annotation/json_annotation.dart';
 
-  Product({
-    required this.id,
-    required this.title,
-    required this.price,
-    required this.description,
-    required this.category,
-    required this.image,
-    required this.rating,
-    required this.ratingCount,
+part 'product_model.g.dart';
+
+@JsonSerializable(explicitToJson: true)
+class ProductModel extends Equatable {
+  @JsonKey(name: 'status')
+  final String status;
+
+  @JsonKey(name: 'message')
+  final String message;
+
+  @JsonKey(name: 'products')
+  final List<ProductData> products;
+
+  const ProductModel({
+    required this.status,
+    required this.message,
+    required this.products,
   });
 
-  factory Product.fromJson(Map<String, dynamic> json) {
-    final ratingJson = json['rating'] ?? {};
-    return Product(
-      id: json['id'] as int,
-      title: (json['title'] ?? '') as String,
-      price: (json['price'] as num).toDouble(),
-      description: (json['description'] ?? '') as String,
-      category: (json['category'] ?? '') as String,
-      image: (json['image'] ?? '') as String,
-      rating: (ratingJson['rate'] ?? 0).toDouble(),
-      ratingCount: (ratingJson['count'] ?? 0) as int,
-    );
-  }
-  factory Product.fromMap(Map<String, dynamic> map) {
-    final ratingMap = map['rating'] ?? {};
-    return Product(
-      id: map['id'] as int,
-      title: (map['title'] ?? '') as String,
-      price: (map['price'] as num).toDouble(),
-      description: (map['description'] ?? '') as String,
-      category: (map['category'] ?? '') as String,
-      image: (map['image'] ?? '') as String,
-      rating: (ratingMap['rate'] ?? 0).toDouble(),
-      ratingCount: (ratingMap['count'] ?? 0) as int,
-    );
-  }
+  factory ProductModel.fromJson(Map<String, dynamic> json) =>
+      _$ProductModelFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ProductModelToJson(this);
+
+  @override
+  List<Object?> get props => [status, message, products];
+}
+
+@JsonSerializable(explicitToJson: true, includeIfNull: true)
+class ProductData extends Equatable {
+  @JsonKey(name: 'id')
+  final int? id;
+
+  @JsonKey(name: 'title')
+  final String? title;
+
+  @JsonKey(name: 'price')
+  final int? price; // keeping num because JSON can return int or double
+
+  @JsonKey(name: 'description')
+  final String? description;
+
+  @JsonKey(name: 'category')
+  final String? category;
+
+  @JsonKey(name: 'image')
+  final String? image;
+
+  @JsonKey(name: 'brand')
+  final String? brand;
+
+  @JsonKey(name: 'model')
+  final String? model;
+
+  @JsonKey(name: 'color')
+  final String? color;
+
+  @JsonKey(name: 'discount', defaultValue: 0)
+  final int? discount;
+
+  @JsonKey(name: 'popular')
+  final bool? popular;
+
+  const ProductData({
+    this.id,
+    this.title,
+    this.price,
+    this.description,
+    this.category,
+    this.image,
+    this.brand,
+    this.model,
+    this.color,
+    this.discount = 0,
+    this.popular,
+  });
+
+  factory ProductData.fromJson(Map<String, dynamic> json) =>
+      _$ProductDataFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ProductDataToJson(this);
+
+  @override
+  List<Object?> get props => [
+    id,
+    title,
+    price,
+    description,
+    category,
+    image,
+    brand,
+    model,
+    color,
+    discount,
+    popular,
+  ];
 }

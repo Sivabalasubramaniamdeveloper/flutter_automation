@@ -1,14 +1,17 @@
 //Predefined TextStyle objects to keep typography consistent.
 
 import 'package:flutter/material.dart';
+import '../../config/responsive/responsive_config.dart';
+import '../../instance/locator.dart';
 
 class AppTextStyles {
-  static TextStyle heading = TextStyle(
-    fontSize: 20,
+  ResponsiveConfig responsive = getIt<ResponsiveConfig>();
+  late final TextStyle heading = TextStyle(
+    fontSize: responsive.sp(17),
     fontWeight: FontWeight.bold,
   );
 
-  static TextStyle body = TextStyle(fontSize: 16);
+  late final TextStyle body = TextStyle(fontSize: responsive.sp(15));
 
-  static TextStyle caption = TextStyle(fontSize: 14);
+  late final TextStyle caption = TextStyle(fontSize: responsive.sp(14));
 }

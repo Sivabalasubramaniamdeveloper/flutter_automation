@@ -3,6 +3,7 @@ import 'package:flutter_automation/features/products/presentation/widgets/produc
 import 'package:flutter_automation/core/logger/app_logger.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../../../config/responsive/responsive_config.dart';
 import '../../../../core/base/abstract/base_screen.dart';
 import '../../../../core/utils/toast_helper.dart';
 import '../../../../instance/app_lifecycle_handler.dart';
@@ -39,6 +40,7 @@ class _ProductsBody extends StatefulWidget {
 class _ProductsBodyState extends State<_ProductsBody> {
   DateTime? _pausedTime;
   final Duration refreshAfter = const Duration(seconds: 10);
+  ResponsiveConfig responsive = getIt<ResponsiveConfig>();
 
   @override
   void initState() {
@@ -79,9 +81,9 @@ class _ProductsBodyState extends State<_ProductsBody> {
   Widget build(BuildContext context) {
     return BlocBuilder<ProductCubit, ProductState>(
       builder: (context, state) {
-        if (state is ProductLoading) {
+        if (state is ProductLoadingState) {
           return const Center(child: CircularProgressIndicator());
-        } else if (state is ProductError) {
+        } else if (state is ProductErrorState) {
           return Center(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -96,11 +98,16 @@ class _ProductsBodyState extends State<_ProductsBody> {
               ],
             ),
           );
-        } else if (state is ProductLoaded) {
-          final items = state.products;
+        } else if (state is ProductSuccessState) {
+          final items = state.products.products;
           if (items.isEmpty) {
             return const Center(child: Text('No products found'));
           }
+          return ResponsiveConfig.responsiveListOrGrid(
+            context: context,
+            itemBuilder: (_, i) => ProductCard(product: items[i]),
+            itemCount: items.length,
+          );
           return RefreshIndicator(
             onRefresh: fetchData,
             child: ListView.separated(

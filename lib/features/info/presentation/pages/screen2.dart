@@ -17,7 +17,6 @@ class Screen2 extends BaseFormScreen {
   @override
   bool get showAppBar => true;
 
-
   @override
   List<Widget> buildFormFields(BuildContext context) {
     return [

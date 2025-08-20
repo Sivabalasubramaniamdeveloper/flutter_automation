@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_automation/core/constants/app_colors.dart';
-
 import '../../core/constants/app_text_styles.dart';
+import '../../instance/locator.dart';
 
+AppTextStyles appTextStyles = getIt<AppTextStyles>();
 ThemeData natureTheme = ThemeData(
   brightness: Brightness.light,
   primaryColor: AppColors.naturalBackground,
@@ -28,8 +29,8 @@ ThemeData natureTheme = ThemeData(
     onSurface: AppColors.blackColor,
   ),
   textTheme: TextTheme(
-    bodyLarge: AppTextStyles.body,
-    bodyMedium: AppTextStyles.caption,
+    bodyLarge: appTextStyles.body,
+    bodyMedium: appTextStyles.caption,
   ),
   floatingActionButtonTheme: FloatingActionButtonThemeData(
     backgroundColor: AppColors.naturalBackground,

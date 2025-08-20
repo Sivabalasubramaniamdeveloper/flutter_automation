@@ -4,7 +4,9 @@ import 'package:flutter_automation/config/router/route_functions.dart';
 import 'package:flutter_automation/core/constants/app_strings.dart';
 import 'package:flutter_automation/core/constants/app_text_styles.dart';
 import 'package:flutter_automation/core/logger/app_logger.dart';
+import '../../../../config/responsive/responsive_config.dart';
 import '../../../../core/widgets/bullet_points_text.dart';
+import '../../../../instance/locator.dart';
 
 class InfoScreen extends StatefulWidget {
   const InfoScreen({super.key});
@@ -15,6 +17,8 @@ class InfoScreen extends StatefulWidget {
 
 class _InfoScreenState extends State<InfoScreen> {
   List<int> numbers = [1, 2, 3];
+  ResponsiveConfig responsive = getIt<ResponsiveConfig>();
+  AppTextStyles appTextStyles = getIt<AppTextStyles>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,22 +35,25 @@ class _InfoScreenState extends State<InfoScreen> {
             children: [
               Text(
                 '🚀 Welcome to Flutter Automation App',
-                style: AppTextStyles.heading,
+                style: appTextStyles.heading,
               ),
-              Text(AppStrings.welcomeBack, style: AppTextStyles.heading),
-              Text(AppStrings.welcomeBack, style: AppTextStyles.heading),
-              Text(AppStrings.username, style: AppTextStyles.heading),
+              Text(AppStrings.welcomeBack, style: appTextStyles.caption),
+              Text(AppStrings.welcomeBack, style: appTextStyles.body),
+              Text(AppStrings.username, style: appTextStyles.body),
 
               // Text(numbers[11].toString()),
-              const SizedBox(height: 20),
-              const Text(
+               SizedBox(height: responsive.hp(2)),
+              Text(
                 '🔧 How to use:',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: responsive.sp(18),
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               const SizedBox(height: 8),
               Text(
                 '- Open your terminal or Git Bash',
-                style: AppTextStyles.body,
+                style: appTextStyles.body,
               ),
               const Text('- Run the following command:'),
               const SizedBox(height: 8),
@@ -62,9 +69,9 @@ class _InfoScreenState extends State<InfoScreen> {
                 ),
               ),
               const SizedBox(height: 16),
-              const Text(
+               Text(
                 '⚙️ Features Available:',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: appTextStyles.body.copyWith(fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 8),
               const BulletPoint(text: 'App name customization'),

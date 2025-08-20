@@ -16,25 +16,33 @@ class AppLogger {
   );
   // Debug log
   static void d(dynamic message, [dynamic error, StackTrace? stackTrace]) {
-   if(FlavorConfig.isDevelopment) _logger.d(message, error: error, stackTrace: stackTrace);
+    if (FlavorConfig.isDevelopment) {
+      _logger.d(message, error: error, stackTrace: stackTrace);
+    }
     _saveToFile("DEBUG", message.toString());
   }
 
   // Info log
   static void i(dynamic message, [dynamic error, StackTrace? stackTrace]) {
-    if(FlavorConfig.isDevelopment) _logger.i(message, error: error, stackTrace: stackTrace);
+    if (FlavorConfig.isDevelopment) {
+      _logger.i(message, error: error, stackTrace: stackTrace);
+    }
     _saveToFile("INFO", message.toString());
   }
 
   // Warning log
   static void w(dynamic message, [dynamic error, StackTrace? stackTrace]) {
-    if(FlavorConfig.isDevelopment) _logger.w(message, error: error, stackTrace: stackTrace);
+    if (FlavorConfig.isDevelopment) {
+      _logger.w(message, error: error, stackTrace: stackTrace);
+    }
     _saveToFile("WARNING", message.toString());
   }
 
   // Error log
   static void e(dynamic message, [dynamic error, StackTrace? stackTrace]) {
-    if(FlavorConfig.isDevelopment) _logger.e(message, error: error, stackTrace: stackTrace);
+    if (FlavorConfig.isDevelopment) {
+      _logger.e(message, error: error, stackTrace: stackTrace);
+    }
     _saveToFile("ERROR", message.toString());
   }
 
@@ -42,7 +50,7 @@ class AppLogger {
   static Future<void> appLogger(String tag, String message) async {
     final now = DateFormat("yyyy-MM-dd HH:mm:ss").format(DateTime.now());
     final logEntry = "[$now] [$tag] $message";
-    if(FlavorConfig.isDevelopment) _logger.t(logEntry); // log with TRACE level
+    if (FlavorConfig.isDevelopment) _logger.t(logEntry); // log with TRACE level
     await _saveToFile(tag, message);
   }
 
@@ -55,7 +63,9 @@ class AppLogger {
       final logEntry = "[$now] [$level] $message\n";
       await file.writeAsString(logEntry, mode: FileMode.append);
     } catch (e) {
-      if(FlavorConfig.isDevelopment) _logger.e("Failed to write log to file", error: e);
+      if (FlavorConfig.isDevelopment) {
+        _logger.e("Failed to write log to file", error: e);
+      }
     }
   }
 
@@ -80,7 +90,9 @@ class AppLogger {
         await file.writeAsString("");
       }
     } catch (e) {
-      if(FlavorConfig.isDevelopment) _logger.e("Failed to clear logs", error: e);
+      if (FlavorConfig.isDevelopment) {
+        _logger.e("Failed to clear logs", error: e);
+      }
     }
   }
 }
