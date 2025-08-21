@@ -1,4 +1,3 @@
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_automation/core/utils/snackbar_helper.dart';
@@ -10,10 +9,21 @@ import 'config/router/route_names.dart';
 import 'config/theme/app_theme.dart';
 import 'core/network/alice.dart';
 import 'core/network/internet_connectivity.dart';
+import 'instance/locator.dart';
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+    setupLocator(context); // valid context
+  }
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -37,7 +47,10 @@ class MyApp extends StatelessWidget {
               return BlocListener<ConnectivityCubit, ConnectivityStatus>(
                 listener: (context, state) {
                   if (state == ConnectivityStatus.disconnected) {
-                    SnackBarHelper.networkError(context, "No Internet Connection");
+                    SnackBarHelper.networkError(
+                      context,
+                      "No Internet Connection",
+                    );
                   } else {
                     SnackBarHelper.showSuccess(context, "Back Online");
                   }

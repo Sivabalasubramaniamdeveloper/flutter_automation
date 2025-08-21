@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import '../../core/constants/app_colors.dart';
 import '../../core/constants/app_text_styles.dart';
+import '../../instance/locator.dart';
+
+AppTextStyles appTextStyles = getIt<AppTextStyles>();
 
 ThemeData darkTheme = ThemeData(
   brightness: Brightness.dark,
@@ -8,15 +11,16 @@ ThemeData darkTheme = ThemeData(
   scaffoldBackgroundColor: AppColors.darkBackground,
   appBarTheme: AppBarTheme(
     backgroundColor: AppColors.darkPrimary,
-    titleTextStyle: AppTextStyles.heading.copyWith(color: Colors.white),
+    titleTextStyle: appTextStyles.heading.copyWith(color: Colors.white),
     iconTheme: const IconThemeData(color: Colors.white),
   ),
   textTheme: TextTheme(
-    bodyLarge: AppTextStyles.body,
-    bodyMedium: AppTextStyles.caption,
+    bodyLarge: appTextStyles.body,
+    bodyMedium: appTextStyles.caption,
   ),
   floatingActionButtonTheme: FloatingActionButtonThemeData(
-    backgroundColor: AppColors.darkPrimary,elevation: 2
+    backgroundColor: AppColors.darkPrimary,
+    elevation: 2,
   ),
   colorScheme: ColorScheme.fromSwatch(
     brightness: Brightness.dark,

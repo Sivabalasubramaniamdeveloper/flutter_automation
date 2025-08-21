@@ -1,19 +1,24 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:get_it/get_it.dart';
 import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../config/responsive/responsive_config.dart';
+import '../core/constants/app_text_styles.dart';
 import '../features/products/data/repositories/product_repository.dart';
 import '../features/products/data/services/product_service.dart';
 
 final GetIt getIt = GetIt.instance;
 
-Future<void> setupLocator() async {
+Future<void> setupLocator(BuildContext context) async {
   getIt.registerSingletonAsync<SharedPreferences>(
     () async => await SharedPreferences.getInstance(),
   );
 
   getIt.registerLazySingleton<Connectivity>(() => Connectivity());
   getIt.registerLazySingleton<Logger>(() => Logger());
+  getIt.registerLazySingleton<ResponsiveConfig>(() => ResponsiveConfig(context));
+  getIt.registerLazySingleton<AppTextStyles>(() => AppTextStyles());
 
   //==================================
   // Register Services

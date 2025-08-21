@@ -17,7 +17,6 @@ class AppColors {
   static const Color lightPrimary = Color(0xFF6200EE);
   static const Color lightSecondary = Color(0xFF03DAC6);
 
-
   // Dark Colors
   static const Color darkBackground = Color(0xFF121212);
   static const Color darkText = Colors.white;
@@ -25,7 +24,7 @@ class AppColors {
   static const Color darkSecondary = Color(0xFF03DAC6);
 
   // Natural Colors
-  static final Color naturalBackground =  Colors.green[700]!;
+  static final Color naturalBackground = Colors.green[700]!;
   static const Color naturalText = Colors.white;
   static final Color naturalSecondary = Colors.brown[400]!;
 }

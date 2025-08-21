@@ -45,18 +45,17 @@ if [[ "$FIREBASE_OPTION" == "yes" || "$FIREBASE_OPTION" == "y" ]]; then
   dart pub global activate flutterfire_cli
   echo "Take the project id give in firebase"
 
-# Prompt for Firebase CLI command
-read -p "📥 Paste the command to run (e.g., flutterfire configure --project=sivashop-95206): " FLUTTER_FIRE_CMD
+ read -p "Enter your base bundle ID (e.g., com.example.app): " BASE_BUNDLE_ID
+  read -p "Enter your Project ID (Take from console): " PROJECT_ID
+  read -p "📢 Enter comma-separated flavor names (Expect production :e.g., dev,sit,uat): " FLAVOR_INPUT
 
-# Check if command is provided
-if [ -z "$FLUTTER_FIRE_CMD" ]; then
-  echo "❌ No command provided. Exiting."
-  exit 1
-fi
 
+echo 'Take you path (C:/Users/SivabalaSubramaniamP/AppData/Local/Pub/Cache/bin)'
+read -p "Give you path: " FLUTTERFIREPATH
+echo  "$FLUTTERFIREPATH"
 # Run the command
-echo "🚀 Running command: $FLUTTER_FIRE_CMD"
-eval "$FLUTTER_FIRE_CMD"
+echo "🚀 Running command: $FLUTTERFIREPATH/flutterfire.bat configure --project $PROJECT_ID"
+eval "$FLUTTERFIREPATH/flutterfire.bat configure --project $PROJECT_ID"
 
 # If command succeeded, update main.dart
 if [ $? -eq 0 ]; then
@@ -83,7 +82,48 @@ if [ $? -eq 0 ]; then
                 options: DefaultFirebaseOptions.currentPlatform);
              '
   echo ''
+
+  # Flavors
+  if [ -n "$FLAVOR_INPUT" ]; then
+  # Parse flavors into array
+  IFS=',' read -ra FLAVORS <<< "$FLAVOR_INPUT"
+  else
+    FLAVOR_INPUT='sit,uat'
+  # Parse flavors into array
+  IFS=',' read -ra FLAVORS <<< "$FLAVOR_INPUT"
   fi
+  fi
+  # shellcheck disable=SC2128
+  for FLAVOR in $FLAVORS; do
+  echo "📱 Adding Android app..."
+  ANDROID_BUNDLE_ID="${BASE_BUNDLE_ID}.${FLAVOR}"
+  echo ANDROID_BUNDLE_ID
+  echo "$FLAVOR"
+      echo "$FLAVOR"
+      echo "$FLAVOR"
+      echo '===================================================================='
+      echo "To confirm the bundle ID type this bundle ID in terminal"
+      echo "$ANDROID_BUNDLE_ID"
+      echo '===================================================================='
+      firebase apps:create ANDROID "$ANDROID_BUNDLE_ID" --project="$PROJECT_ID"
+
+  APP_ID=$(firebase apps:list ANDROID --project "$PROJECT_ID" | grep "$ANDROID_BUNDLE_ID" | grep -oE '[0-9]+:[0-9]+:android:[a-f0-9]+')
+  echo "✅ App ID: $APP_ID"
+
+    # Download google-services.json
+
+    DEST_PATH="android/app/src/$FLAVOR"
+    mkdir -p "$DEST_PATH"
+      echo "⬇️ Downloading google-services.json for $FLAVOR..."
+
+  firebase apps:sdkconfig ANDROID "$APP_ID" | grep -A100 "{" > "android/app/src/${FLAVOR}/google-services.json"
+
+
+    echo "📄 Placed google-services.json for $FLAVOR at $DEST_PATH"
+    git add -f "android/app/src/${FLAVOR}/google-services.json"
+
+      echo "✅ ${FLAVOR} flavor setup completed!"
+  done
 else
   echo "⏩ Skipping Firebase initialization."
 fi

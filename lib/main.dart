@@ -10,7 +10,6 @@ import 'package:overlay_support/overlay_support.dart';
 import 'app.dart';
 import 'config/flavor/flavor_config.dart';
 import 'core/network/alice.dart';
-import 'instance/locator.dart';
 
 Future<void> main() async {
   runZonedGuarded(
@@ -24,7 +23,6 @@ Future<void> main() async {
       ]);
       await EasyLocalization.ensureInitialized();
 
-      setupLocator();
       // changeAppIcon();
       // const fatalError = true;
       // // Non-async exceptions
