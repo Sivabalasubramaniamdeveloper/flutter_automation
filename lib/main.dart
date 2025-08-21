@@ -23,6 +23,7 @@ Future<void> main() async {
       ]);
       await EasyLocalization.ensureInitialized();
 
+
       // changeAppIcon();
       // const fatalError = true;
       // // Non-async exceptions
