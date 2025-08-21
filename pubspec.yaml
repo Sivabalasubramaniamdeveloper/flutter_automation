@@ -39,7 +39,7 @@ dependencies:
   pretty_dio_logger: ^1.4.0
   dio: ^5.8.0+1
   intl: ^0.20.2
-  firebase_messaging: ^16.0.0
+  firebase_messaging: ^15.1.6
   shared_preferences: ^2.5.3
   flutter_local_notifications: ^19.4.0
   timezone: any
@@ -49,7 +49,7 @@ dependencies:
   connectivity_plus: ^6.1.5
   get_it: ^8.2.0
   dotenv: ^4.2.0
-  firebase_crashlytics: ^5.0.0
+
   path_provider: ^2.1.5
   easy_localization: ^3.0.8
   logger: ^2.6.1
@@ -58,6 +58,7 @@ dependencies:
   dartz: ^0.10.1
   json_annotation: ^4.9.0
   equatable: ^2.0.7
+  firebase_core: ^3.8.1
 
 dev_dependencies:
   flutter_test:
