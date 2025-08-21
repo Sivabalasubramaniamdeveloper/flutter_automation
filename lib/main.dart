@@ -22,6 +22,7 @@ Future<void> main() async {
         DeviceOrientation.landscapeRight,
       ]);
       await EasyLocalization.ensureInitialized();
+
       // changeAppIcon();
       // const fatalError = true;
       // // Non-async exceptions
