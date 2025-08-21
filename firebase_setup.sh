@@ -67,7 +67,7 @@ if [[ "$FIREBASE_OPTION" == "yes" || "$FIREBASE_OPTION" == "y" ]]; then
     echo "To confirm the bundle ID type this bundle ID in terminal"
     echo "$ANDROID_BUNDLE_ID"
     echo '===================================================================='
-#    firebase apps:create ANDROID "$ANDROID_BUNDLE_ID" --project="$PROJECT_ID"
+    firebase apps:create ANDROID "$ANDROID_BUNDLE_ID" --project="$PROJECT_ID"
 
 APP_ID=$(firebase apps:list ANDROID --project "$PROJECT_ID" | grep "$ANDROID_BUNDLE_ID" | grep -oE '[0-9]+:[0-9]+:android:[a-f0-9]+')
 echo "✅ App ID: $APP_ID"
