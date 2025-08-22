@@ -15,35 +15,35 @@ class AppLogger {
     ),
   );
   // Debug log
-  static void d(dynamic message, [dynamic error, StackTrace? stackTrace]) {
+  static void debug(dynamic message, [dynamic error, StackTrace? stackTrace]) {
     if (FlavorConfig.isDevelopment) {
       _logger.d(message, error: error, stackTrace: stackTrace);
+      _saveToFile("DEBUG", message.toString());
     }
-    _saveToFile("DEBUG", message.toString());
   }
 
   // Info log
-  static void i(dynamic message, [dynamic error, StackTrace? stackTrace]) {
+  static void info(dynamic message, [dynamic error, StackTrace? stackTrace]) {
     if (FlavorConfig.isDevelopment) {
       _logger.i(message, error: error, stackTrace: stackTrace);
+      _saveToFile("INFO", message.toString());
     }
-    _saveToFile("INFO", message.toString());
   }
 
   // Warning log
-  static void w(dynamic message, [dynamic error, StackTrace? stackTrace]) {
+  static void warning(dynamic message, [dynamic error, StackTrace? stackTrace]) {
     if (FlavorConfig.isDevelopment) {
       _logger.w(message, error: error, stackTrace: stackTrace);
+      _saveToFile("WARNING", message.toString());
     }
-    _saveToFile("WARNING", message.toString());
   }
 
   // Error log
-  static void e(dynamic message, [dynamic error, StackTrace? stackTrace]) {
+  static void error(dynamic message, [dynamic error, StackTrace? stackTrace]) {
     if (FlavorConfig.isDevelopment) {
       _logger.e(message, error: error, stackTrace: stackTrace);
+      _saveToFile("ERROR", message.toString());
     }
-    _saveToFile("ERROR", message.toString());
   }
 
   // Custom logger with tag

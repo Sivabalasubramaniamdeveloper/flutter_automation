@@ -19,7 +19,7 @@ class ProductRepositoryImp extends ProductRepository {
       final response = await _service.fetchProductsRaw('s');
       return Right(response);
     } catch (e) {
-      AppLogger.e("Repository Error: $e", "Repository Error:");
+      AppLogger.error("Repository Error: $e", "Repository Error:");
       return Left(Failure(message: e.toString()));
     }
   }
