@@ -11,12 +11,10 @@ flutter pub global activate rename
 # Collect user input
 read -p "📢 Enter your app name: " APP_NAME
 read -p "📢 Enter your base package name (e.g., com.example.app): " PACKAGE_NAME
-#read -p "📢 Enter this flutter folder name (e.g., flutter_automation): " DART_PACKAGE
-read -p "📢 Enter path to app icon (optional, PNG 512x512): " ICON_PATH
 read -p "📢 Enter comma-separated flavor names (e.g., dev,sit,uat,prod): " FLAVOR_INPUT
 
 echo "✅ App Name: $APP_NAME"
-        echo "✅ Package Name: $PACKAGE_NAME"
+echo "✅ Package Name: $PACKAGE_NAME"
 DART_PACKAGE='flutter_automation'
 echo "✅ Dart Import Name: $DART_PACKAGE"
 [ -n "$ICON_PATH" ] && echo "✅ Icon Path: $ICON_PATH" || echo "Setting default icon..."

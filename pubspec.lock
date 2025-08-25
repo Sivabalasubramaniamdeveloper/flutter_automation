@@ -742,7 +742,7 @@ packages:
     source: hosted
     version: "0.5.0"
   overlay_support:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: overlay_support
       sha256: fc39389bfd94e6985e1e13b2a88a125fc4027608485d2d4e2847afe1b2bb339c
@@ -862,7 +862,7 @@ packages:
     source: hosted
     version: "1.4.0"
   provider:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: provider
       sha256: "4abbd070a04e9ddc287673bf5a030c7ca8b685ff70218720abab8b092f53dd84"
@@ -1075,7 +1075,7 @@ packages:
     source: hosted
     version: "0.7.4"
   timezone:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: timezone
       sha256: dd14a3b83cfd7cb19e7888f1cbc20f258b8d71b54c06f79ac585f14093a287d1

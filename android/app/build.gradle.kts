@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.siva.flutter_automation"
+    namespace = "com.example.app"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -29,6 +29,24 @@ android {
         targetSdk = 35
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+    }
+
+    flavorDimensions += "flavor-type"
+    productFlavors {
+        create("sit") {
+            dimension = "flavor-type"
+            applicationIdSuffix = ".sit"
+            resValue("string", "app_name", "SIVA SIT")
+        }
+        create("uat") {
+            dimension = "flavor-type"
+            applicationIdSuffix = ".uat"
+            resValue("string", "app_name", "SIVA UAT")
+        }
+        create("prod") {
+            dimension = "flavor-type"
+            resValue("string", "app_name", "SIVA")
+        }
     }
 
     buildTypes {
