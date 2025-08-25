@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.siva.flutter_automation"
+    namespace = "com.example.app"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -22,13 +22,31 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.siva.flutter_automation"
+        applicationId = "com.example.app"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = 23
         targetSdk = 35
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+    }
+
+    flavorDimensions += "flavor-type"
+    productFlavors {
+        create("sit") {
+            dimension = "flavor-type"
+            applicationIdSuffix = ".sit"
+            resValue("string", "app_name", "SIVA SIT")
+        }
+        create("uat") {
+            dimension = "flavor-type"
+            applicationIdSuffix = ".uat"
+            resValue("string", "app_name", "SIVA UAT")
+        }
+        create("prod") {
+            dimension = "flavor-type"
+            resValue("string", "app_name", "SIVA")
+        }
     }
 
     buildTypes {
