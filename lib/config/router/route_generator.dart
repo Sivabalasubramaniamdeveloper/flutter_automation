@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_automation/config/router/route_names.dart';
+import 'package:flutter_automation/core/logger/app_logger.dart';
 import 'package:flutter_automation/features/info/presentation/pages/info_screen.dart';
 import 'package:flutter_automation/features/info/presentation/pages/screen1.dart';
 import 'package:flutter_automation/features/info/presentation/pages/screen2.dart';
 import 'package:flutter_automation/features/info/presentation/pages/screen3.dart';
 import 'package:flutter_automation/features/products/presentation/pages/products_page.dart';
+import 'package:go_router/go_router.dart';
+
+import '../../features/products/presentation/pages/single_product.dart';
 
 class AppRouter {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -27,6 +31,58 @@ class AppRouter {
         );
     }
   }
+
+  static GoRouter router = GoRouter(
+    initialLocation: RouteNames.home,
+    routes: [
+      GoRoute(
+        name: RouteNames.home,
+        path: '/',
+        builder: (context, state) => InfoScreen(),
+      ),
+      GoRoute(
+        name: RouteNames.products,
+        path: '/products',
+        builder: (context, state) => ProductsPage(),
+        routes: <RouteBase>[
+          GoRoute(
+            name: "sss",
+            path: 'single-product/:id',
+            builder: (context, state) {
+              final id = state.pathParameters['id']!;
+              return SingleProduct(productId: id);
+            },
+          ),
+        ],
+      ),
+      GoRoute(
+        name: RouteNames.screen1,
+        path: '/screen1',
+        builder: (context, state) => Screen1(),
+      ),
+      GoRoute(
+        name: RouteNames.screen2,
+        path: '/screen2',
+        builder: (context, state) => Screen2(),
+      ),
+      GoRoute(
+        name: RouteNames.screen3,
+        path: '/screen3',
+        builder: (context, state) => Screen3(),
+      ),
+      // GoRoute(
+      //   path: '/profile/:id',  // Dynamic path
+      //   builder: (context, state) {
+      //     final id = state.pathParameters['id']!;
+      //     return ProfilePage(userId: id);
+      //   },
+      // ),
+    ],
+    // redirect: (context, state) {
+    //   // Example: simple auth guard
+    //   // CustomAppLogger.appLogger("state.path", state.path!);
+    // },
+  );
 
   static PageRouteBuilder _buildPageRoute(Widget page, RouteSettings settings) {
     return PageRouteBuilder(

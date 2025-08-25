@@ -34,12 +34,10 @@ class _MyAppState extends State<MyApp> {
         splitScreenMode: true,
         designSize: const Size(412, 846),
         builder: (context, child) {
-          return MaterialApp(
+          return MaterialApp.router(
             title: "Flutter Automation",
-            navigatorKey: dioProvider.navigatorKey,
+            routerConfig: AppRouter.router,
             theme: AppTheme.getNaturalTheme(),
-            initialRoute: RouteNames.home,
-            onGenerateRoute: AppRouter.generateRoute,
             localizationsDelegates: context.localizationDelegates,
             supportedLocales: context.supportedLocales,
             locale: context.locale,

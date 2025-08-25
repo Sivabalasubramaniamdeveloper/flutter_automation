@@ -68,7 +68,7 @@ Future<void> main() async {
       );
     },
     (error, stack) {
-      AppLogger.error(error.toString(), "runZonedGuarded");
+      CustomAppLogger.error(error.toString(), "runZonedGuarded");
     },
   );
   ErrorWidget.builder = (FlutterErrorDetails details) {
