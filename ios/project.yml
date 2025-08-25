@@ -1,0 +1,84 @@
+name: Runner
+options:
+  bundleIdPrefix: com.siva.app
+configs:
+  Debug: debug
+  Release: release
+  Debug-sit: debug
+  Release-sit: release
+  Debug-uat: debug
+  Release-uat: release
+  Debug-prod: debug
+  Release-prod: release
+
+targets:
+  Runner:
+    type: application
+    platform: iOS
+    sources:
+      - Runner
+      - Flutter
+    resources: [Runner/Assets.xcassets, Runner/Base.lproj]
+    buildPhases:
+      - name: "[Flutter] Build"
+        runScript:
+          script: |
+            export FLUTTER_ROOT=/Users/dys/Rahul/Flutter/flutter
+            "$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh" build
+      - name: "[Flutter] Embed & Thin"
+        runScript:
+          script: |
+            export FLUTTER_ROOT=/Users/dys/Rahul/Flutter/flutter
+            "$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh" embed_and_thin
+    settings:
+      base:
+        PRODUCT_NAME: $(TARGET_NAME)
+        PRODUCT_BUNDLE_IDENTIFIER: com.siva.app
+      configs:
+        Debug-sit:
+          PRODUCT_BUNDLE_IDENTIFIER: com.siva.app.sit
+          PRODUCT_NAME: MyApp-SIT
+          SWIFT_OBJC_BRIDGING_HEADER: Runner/Runner-Bridging-Header.h
+        Release-sit:
+          PRODUCT_BUNDLE_IDENTIFIER: com.siva.app.sit
+          PRODUCT_NAME: MyApp-SIT
+          SWIFT_OBJC_BRIDGING_HEADER: Runner/Runner-Bridging-Header.h
+        Debug-uat:
+          PRODUCT_BUNDLE_IDENTIFIER: com.siva.app.uat
+          PRODUCT_NAME: MyApp-UAT
+          SWIFT_OBJC_BRIDGING_HEADER: Runner/Runner-Bridging-Header.h
+        Release-uat:
+          PRODUCT_BUNDLE_IDENTIFIER: com.siva.app.uat
+          PRODUCT_NAME: MyApp-UAT
+          SWIFT_OBJC_BRIDGING_HEADER: Runner/Runner-Bridging-Header.h
+        Debug-prod:
+          PRODUCT_BUNDLE_IDENTIFIER: com.siva.app
+          PRODUCT_NAME: MyApp
+          SWIFT_OBJC_BRIDGING_HEADER: Runner/Runner-Bridging-Header.h
+        Release-prod:
+          PRODUCT_BUNDLE_IDENTIFIER: com.siva.app
+          PRODUCT_NAME: MyApp
+          SWIFT_OBJC_BRIDGING_HEADER: Runner/Runner-Bridging-Header.h
+    configFiles:
+      Debug: Flutter/Debug.xcconfig
+      Release: Flutter/Release.xcconfig
+
+schemes:
+  sit:
+    build:
+      targets:
+        Runner: all
+    run:
+      config: Debug-sit
+  uat:
+    build:
+      targets:
+        Runner: all
+    run:
+      config: Debug-uat
+  prod:
+    build:
+      targets:
+        Runner: all
+    run:
+      config: Debug-prod

@@ -1,3 +1,4 @@
+#!/bin/bash
   echo "📘 Flutter Automation Setup Script - Available Commands:"
   echo ""
   echo "  ./help.sh                     Show this help menu"
