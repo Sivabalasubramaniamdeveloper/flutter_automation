@@ -10,6 +10,7 @@ import 'package:overlay_support/overlay_support.dart';
 import 'app.dart';
 import 'config/flavor/flavor_config.dart';
 import 'core/network/alice.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 Future<void> main() async {
   runZonedGuarded(
@@ -22,7 +23,11 @@ Future<void> main() async {
         DeviceOrientation.landscapeRight,
       ]);
       await EasyLocalization.ensureInitialized();
-
+      try {
+        await dotenv.load(fileName: ".env");
+      } catch (e) {
+        throw Exception('Error loading .env file: $e');
+      }
       // changeAppIcon();
       // const fatalError = true;
       // // Non-async exceptions

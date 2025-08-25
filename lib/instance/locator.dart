@@ -5,6 +5,7 @@ import 'package:logger/logger.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../config/responsive/responsive_config.dart';
 import '../core/constants/app_text_styles.dart';
+import '../core/utils/secure_storage.dart';
 import '../features/products/data/repositories/product_repository.dart';
 import '../features/products/data/services/product_service.dart';
 
@@ -19,6 +20,7 @@ Future<void> setupLocator(BuildContext context) async {
   getIt.registerLazySingleton<Logger>(() => Logger());
   getIt.registerLazySingleton<ResponsiveConfig>(() => ResponsiveConfig(context));
   getIt.registerLazySingleton<AppTextStyles>(() => AppTextStyles());
+  getIt.registerLazySingleton<CustomSecureStorage>(() => CustomSecureStorage());
 
   //==================================
   // Register Services
