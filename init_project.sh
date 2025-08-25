@@ -16,7 +16,7 @@ read -p "📢 Enter path to app icon (optional, PNG 512x512): " ICON_PATH
 read -p "📢 Enter comma-separated flavor names (e.g., dev,sit,uat,prod): " FLAVOR_INPUT
 
 echo "✅ App Name: $APP_NAME"
-echo "✅ Package Name: $PACKAGE_NAME"
+        echo "✅ Package Name: $PACKAGE_NAME"
 DART_PACKAGE='flutter_automation'
 echo "✅ Dart Import Name: $DART_PACKAGE"
 [ -n "$ICON_PATH" ] && echo "✅ Icon Path: $ICON_PATH" || echo "Setting default icon..."
