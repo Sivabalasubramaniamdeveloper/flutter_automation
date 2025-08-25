@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_automation/features/products/presentation/widgets/product_card.dart';
 import 'package:flutter_automation/core/logger/app_logger.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../../../../config/responsive/responsive_config.dart';
 import '../../../../core/base/abstract/base_screen.dart';
 import '../../../../core/utils/toast_helper.dart';
