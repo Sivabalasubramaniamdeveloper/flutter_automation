@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../../config/responsive/responsive_config.dart';
-import '../../../../instance/locator.dart';
 import '../../data/models/product_model.dart';
 
 class ProductCard extends StatelessWidget {
@@ -9,7 +7,6 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Card(
       elevation: 2,
       clipBehavior: Clip.antiAlias,

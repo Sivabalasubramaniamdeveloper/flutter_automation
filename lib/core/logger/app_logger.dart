@@ -31,7 +31,11 @@ class AppLogger {
   }
 
   // Warning log
-  static void warning(dynamic message, [dynamic error, StackTrace? stackTrace]) {
+  static void warning(
+    dynamic message, [
+    dynamic error,
+    StackTrace? stackTrace,
+  ]) {
     if (FlavorConfig.isDevelopment) {
       _logger.w(message, error: error, stackTrace: stackTrace);
       _saveToFile("WARNING", message.toString());

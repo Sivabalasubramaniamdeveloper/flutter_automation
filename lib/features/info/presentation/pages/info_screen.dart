@@ -42,7 +42,7 @@ class _InfoScreenState extends State<InfoScreen> {
               Text(AppStrings.username, style: appTextStyles.body),
 
               // Text(numbers[11].toString()),
-               SizedBox(height: responsive.hp(2)),
+              SizedBox(height: responsive.hp(2)),
               Text(
                 '🔧 How to use:',
                 style: TextStyle(
@@ -69,7 +69,7 @@ class _InfoScreenState extends State<InfoScreen> {
                 ),
               ),
               const SizedBox(height: 16),
-               Text(
+              Text(
                 '⚙️ Features Available:',
                 style: appTextStyles.body.copyWith(fontWeight: FontWeight.bold),
               ),

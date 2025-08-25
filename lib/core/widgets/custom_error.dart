@@ -15,7 +15,10 @@ class _MyCustomErrorWidgetState extends State<MyCustomErrorWidget> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    AppLogger.error(widget.details.exception.toString(), widget.details.library);
+    AppLogger.error(
+      widget.details.exception.toString(),
+      widget.details.library,
+    );
   }
 
   @override

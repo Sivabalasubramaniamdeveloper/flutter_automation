@@ -67,11 +67,9 @@ class _ProductsBodyState extends State<_ProductsBody> {
   }
 
   Future<void> fetchData() async {
-    SharedPreferences sharedPreference = getIt<SharedPreferences>();
     try {
       BlocProvider.of<ProductCubit>(context).fetchProducts();
-      sharedPreference.setString("initial", "initial Value");
-      AppLogger.appLogger("Insert", sharedPreference.getString("initial")!);
+      AppLogger.appLogger("Insert", "sss");
     } catch (err) {
       showErrorToast(err.toString());
     }
@@ -107,15 +105,6 @@ class _ProductsBodyState extends State<_ProductsBody> {
             context: context,
             itemBuilder: (_, i) => ProductCard(product: items[i]),
             itemCount: items.length,
-          );
-          return RefreshIndicator(
-            onRefresh: fetchData,
-            child: ListView.separated(
-              padding: const EdgeInsets.all(12),
-              itemCount: items.length,
-              separatorBuilder: (_, __) => const SizedBox(height: 10),
-              itemBuilder: (_, i) => ProductCard(product: items[i]),
-            ),
           );
         } else {
           return const SizedBox.shrink();

@@ -24,6 +24,7 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     setupLocator(context); // valid context
   }
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(

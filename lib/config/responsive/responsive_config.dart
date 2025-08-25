@@ -78,7 +78,6 @@ class ResponsiveConfig {
     }
   }
 
-
   // Responsive Form Fields (1 column for phone, 2+ for tablet/landscape)
   static Widget responsiveFormFields({
     required BuildContext context,
@@ -99,11 +98,10 @@ class ResponsiveConfig {
         children: fields
             .map(
               (f) =>
-              Padding(padding: const EdgeInsets.only(bottom: 16), child: f),
-        )
+                  Padding(padding: const EdgeInsets.only(bottom: 16), child: f),
+            )
             .toList(),
       );
     }
   }
 }
- 
